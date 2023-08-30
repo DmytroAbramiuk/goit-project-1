@@ -1,9 +1,7 @@
 package Player;
-import FileReader.FileReader;
 import ListOfCities.ListOfCities;
 
-import java.io.File;
-import java.util.Collection;
+
 import java.util.List;
 
 public class WordValidator {
