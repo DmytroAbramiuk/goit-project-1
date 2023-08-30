@@ -6,28 +6,19 @@ import java.util.List;
 import java.util.Random;
 
 public class CitiesGenerator {
-    private Collection<String> citiesForComputer;
-
-    public CitiesGenerator(Collection<String> citiesForComputer) {
-        this.citiesForComputer = citiesForComputer;
-    }
-
-    public List<String> generateRandomCities() {
-        List<String> randomCities = new ArrayList<>(citiesForComputer);
-        List<String> selectedCities = new ArrayList<>();
+    public static List<String> getRandomCities(List<String> allCities) {
+        int numberOfRandomCity = 20;
+        List<String> citiesForComputer = new ArrayList<>();
         Random random = new Random();
 
-        int numberOfCitiesToSelect = 200;
+        while(citiesForComputer.size()<numberOfRandomCity){
+            String randomCity = allCities.get(random.nextInt(allCities.size()));
+            if (!citiesForComputer.contains(randomCity)) {
+                citiesForComputer.add(randomCity);
+            }
 
-        while (selectedCities.size() < numberOfCitiesToSelect && !randomCities.isEmpty()) {
-            int randomIndex = random.nextInt(randomCities.size());
-            selectedCities.add(randomCities.remove(randomIndex));
         }
 
-        return selectedCities;
-    }
-
-    public Collection<String> getCitiesForComputer() {
         return citiesForComputer;
     }
 }
