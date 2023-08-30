@@ -8,7 +8,12 @@ public class WordValidator {
         computerWord = computerWord.toLowerCase();
         playerWord = playerWord.toLowerCase();
         System.out.println(allCities);
+        if(playerWord.equals("здаюсь")){
+            // here we should add ending game method
+
+        }
         if(computerWord.equals("firstword")){
+            usedWords.add(playerWord);
             return true;
         }
         if(isWordInList(usedWords,playerWord)){
@@ -18,7 +23,7 @@ public class WordValidator {
         if(playerWord.charAt(0) == computerWord.charAt(computerWord.length()-1)){
             if(isWordInList(allCities,playerWord)) {
                 // Here we must add that word to used WordList
-                //
+                usedWords.add(playerWord);
                 return true;
             }
         }
