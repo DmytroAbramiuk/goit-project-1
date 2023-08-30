@@ -1,5 +1,4 @@
-import Interface.GamePanel;
-import Interface.MainFrame;
+import UserInterface.MainFrame;
 
 public class Main {
     public static void main(String[] args) {

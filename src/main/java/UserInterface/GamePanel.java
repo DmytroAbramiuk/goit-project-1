@@ -1,4 +1,4 @@
-package Interface;
+package UserInterface;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -47,12 +47,13 @@ public class GamePanel extends JPanel {
         JPanel computerPanel = new JPanel();
         computerPanel.setBounds(0,PANEL_HEIGHT/2-70, 400,40);
         computerPanel.setLayout(new FlowLayout());
-        computerPanel.setBackground(new Color(229, 171, 102, 158));
+        computerPanel.setOpaque(false);
 
         Font font = new Font("Arial Black", Font.BOLD, 20);
 
         JLabel computerLabel = new JLabel("Computer:");
         computerLabel.setFont(font);
+
         JLabel cityFromComputerLabel = new JLabel("city");
         cityFromComputerLabel.setFont(font);
 
@@ -66,6 +67,7 @@ public class GamePanel extends JPanel {
         JPanel userPanel = new JPanel();
         userPanel.setBounds(20,PANEL_HEIGHT/2-30, 360,40);
         userPanel.setLayout(new GridLayout());
+        userPanel.setOpaque(false);
 
         Font font = new Font("Arial Black", Font.BOLD, 20);
 

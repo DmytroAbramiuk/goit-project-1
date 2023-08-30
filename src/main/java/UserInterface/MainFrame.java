@@ -1,4 +1,4 @@
-package Interface;
+package UserInterface;
 
 import javax.swing.*;
 
@@ -13,6 +13,8 @@ public class MainFrame extends JFrame {
         this.add(startPanel);
 //        GamePanel gamePanel = new GamePanel();
 //        this.add(gamePanel);
+//        EndPanel endPanel = new EndPanel();
+//        this.add(endPanel);
 
         this.pack();
         this.setVisible(true);
