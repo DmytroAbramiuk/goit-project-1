@@ -10,7 +10,7 @@ public class WordValidator {
     static boolean isPlayerWordFirst = true;
     // add File reader  here
 
-    static List<String> usedWords;
+
     static int wordCounter = 0;
     public static boolean validate(String playerWord, String computerWord){
         computerWord = computerWord.toLowerCase();
@@ -20,17 +20,17 @@ public class WordValidator {
 
         }
         if(isPlayerWordFirst){
-            usedWords.add(playerWord);
+            ListOfCities.usedWords.add(playerWord);
             wordCounter++;
             isPlayerWordFirst = false;
             return true;
         }
-        if(isWordInList(usedWords,playerWord)){
+        if(isWordInList(ListOfCities.usedWords,playerWord)){
             return false;
         }
         if(isLetterMathing(playerWord,computerWord)){
             if(isWordInList(ListOfCities.allCities,playerWord)) {
-                usedWords.add(playerWord);
+                ListOfCities.usedWords.add(playerWord);
                 wordCounter++;
                 return true;
             }
