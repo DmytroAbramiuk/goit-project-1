@@ -7,8 +7,8 @@ import java.util.Collection;
 public class WordValidator {
     static boolean isPlayerWordFirst = true;
     // add File reader  here
-    static Collection<String> allCities;
-    static Collection<String> usedWords = FileReader.readFile(new File());
+    static Collection<String> allCities = FileReader.readFile(new File("src/main/java/Files/Cities.txt"));
+    static Collection<String> usedWords;
     static int wordCounter = 0;
     public static boolean validate(String playerWord, String computerWord){
         computerWord = computerWord.toLowerCase();
