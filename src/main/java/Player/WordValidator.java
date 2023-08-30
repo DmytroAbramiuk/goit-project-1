@@ -7,6 +7,7 @@ public class WordValidator {
     // add File reader  here
     static Collection<String> allCities;
     static Collection<String> usedWords;
+    static int wordCounter = 0;
     public static boolean validate(String playerWord, String computerWord){
         computerWord = computerWord.toLowerCase();
         playerWord = playerWord.toLowerCase();
@@ -16,6 +17,7 @@ public class WordValidator {
         }
         if(isPlayerWordFirst){
             usedWords.add(playerWord);
+            wordCounter++;
             isPlayerWordFirst = false;
             return true;
         }
@@ -25,6 +27,7 @@ public class WordValidator {
         if(isLetterMathing(playerWord,computerWord)){
             if(isWordInList(allCities,playerWord)) {
                 usedWords.add(playerWord);
+                wordCounter++;
                 return true;
             }
         }
