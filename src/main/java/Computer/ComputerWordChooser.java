@@ -19,6 +19,8 @@ public class ComputerWordChooser {
                 .collect(Collectors.toList());
         if(correctCities.size() > 0){
             randomIndex = random.nextInt(correctCities.size());
+            //removing city from cityList
+            CitiesGenerator.citiesForComputer.remove(randomIndex);
             // adding used word to The List
             ListOfCities.usedWords.add(correctCities.get(randomIndex));
             return correctCities.get(randomIndex);
