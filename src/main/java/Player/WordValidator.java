@@ -3,26 +3,27 @@ package Player;
 import java.util.Collection;
 
 public class WordValidator {
-    public static boolean validate(Collection<String> allCities,Collection<String> usedWords ,
-                                   String playerWord, String computerWord){
+    static boolean isPlayerWordFirst = true;
+    // add File reader  here
+    static Collection<String> allCities;
+    static Collection<String> usedWords;
+    public static boolean validate(String playerWord, String computerWord){
         computerWord = computerWord.toLowerCase();
         playerWord = playerWord.toLowerCase();
-        System.out.println(allCities);
         if(playerWord.equals("здаюсь")){
             // here we should add ending game method
 
         }
-        if(computerWord.equals("firstword")){
+        if(isPlayerWordFirst){
             usedWords.add(playerWord);
+            isPlayerWordFirst = false;
             return true;
         }
         if(isWordInList(usedWords,playerWord)){
             return false;
         }
-
-        if(playerWord.charAt(0) == computerWord.charAt(computerWord.length()-1)){
+        if(isLetterMathing(playerWord,computerWord)){
             if(isWordInList(allCities,playerWord)) {
-                // Here we must add that word to used WordList
                 usedWords.add(playerWord);
                 return true;
             }
@@ -39,5 +40,8 @@ public class WordValidator {
             }
         }
         return false;
+    }
+    private static boolean isLetterMathing(String playerWord, String computerWord){
+        return playerWord.charAt(0) == computerWord.charAt(computerWord.length()-1);
     }
 }
