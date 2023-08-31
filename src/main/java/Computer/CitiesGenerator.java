@@ -8,16 +8,18 @@ import java.util.Random;
 
 public class CitiesGenerator {
     protected static List<String> citiesForComputer =new ArrayList<>();
-    public static void getRandomCities() {
-        int numberOfRandomCity = 2000;
+    public static List<String> getRandomCities() {
+        int numberOfRandomCity = 200;
         Random random = new Random();
-        int listOfCitiesLenght = ListOfCities.allCities.size();
+        int listOfCitiesLength = ListOfCities.allCities.size();
         while (citiesForComputer.size() < numberOfRandomCity) {
-            String randomCity = ListOfCities.allCities.get(random.nextInt(listOfCitiesLenght));
+            String randomCity = ListOfCities.allCities.get(random.nextInt(listOfCitiesLength));
             if (!citiesForComputer.contains(randomCity)) {
                 citiesForComputer.add(randomCity.toLowerCase());
             }
         }
+
+        return citiesForComputer;
     }
 }
 

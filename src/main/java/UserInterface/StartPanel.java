@@ -6,10 +6,9 @@ import java.awt.*;
 
 public class StartPanel extends JPanel {
 
-    JTextField usernameField;
-    JPanel gameplayPanel;
-    JButton startButton;
-    JLabel userNameLabel;
+    private JTextField usernameField;
+    private JPanel gameplayPanel;
+    private JButton startButton;
 
     public StartPanel() {
         initialize();
@@ -45,7 +44,7 @@ public class StartPanel extends JPanel {
         startButton = new JButton("START GAME");
         startButton.setPreferredSize(new Dimension(SizesOfComponents.START_BUTTON_WIDTH,
                 SizesOfComponents.START_BUTTON_HEIGHT));
-        startButton.setFont(makeFont(12));
+        startButton.setFont(FontCreator.makeFont(12));
         startButton.setBorder(new LineBorder(Color.BLACK));
 
         eventListenerForStartButton();
@@ -54,28 +53,26 @@ public class StartPanel extends JPanel {
     }
 
     private void createUsernameLabel() {
-        userNameLabel = new JLabel("Put your username:");
-        userNameLabel.setFont(makeFont(15));
+        JLabel userNameLabel = new JLabel("Put your username:");
+        userNameLabel.setFont(FontCreator.makeFont(15));
 
         gameplayPanel.add(userNameLabel);
     }
 
-    private void createUsernameField(){
+    private void createUsernameField() {
         usernameField = new JTextField();
-        usernameField.setFont(makeFont(15));
+        usernameField.setFont(FontCreator.makeFont(15));
         usernameField.setPreferredSize(new Dimension(SizesOfComponents.USERNAME_FIELD_WIDTH,
                 SizesOfComponents.USERNAME_FIELD_HEIGHT));
 
         gameplayPanel.add(usernameField);
     }
 
-    private Font makeFont(int fontSize){
-        return new Font("Arial Black", Font.BOLD, fontSize);
-    }
 
-    private void eventListenerForStartButton(){
+
+    private void eventListenerForStartButton() {
         startButton.addActionListener(e -> {
-            if(usernameField.getText().isEmpty()){
+            if (usernameField.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Put your username to start game");
             } else {
                 replacePanel();
@@ -83,7 +80,7 @@ public class StartPanel extends JPanel {
         });
     }
 
-    private void replacePanel(){
+    private void replacePanel() {
         Container container = getRootPane().getContentPane();
         container.setFocusable(false);
         container.removeAll();
@@ -95,9 +92,5 @@ public class StartPanel extends JPanel {
 
         container.revalidate();
         container.repaint();
-
-        setVisible(true);
     }
-
-
 }

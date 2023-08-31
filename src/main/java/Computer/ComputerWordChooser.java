@@ -1,30 +1,32 @@
 package Computer;
 
-import ListOfCities.ListOfCities;
-
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 
-public class ComputerWordChooser {
-    public static String chooseWord(String playerWord){
+
+public class ComputerWordChooser{
+
+    public static String chooseCity(String playerCity, List<String> computerCities){
+        List<String> correctCities;
         Random random = new Random();
         int randomIndex;
-        // Generated cities for Computer
-        CitiesGenerator.getRandomCities();
-        String finalPlayerWord = playerWord.toLowerCase();
-        //Genereting List with correct first Letter
-        List<String> correctCities = CitiesGenerator.citiesForComputer.stream()
-                .filter(c -> c.charAt(0) == finalPlayerWord.charAt(finalPlayerWord.length()-1))
-                .collect(Collectors.toList());
-        if(correctCities.size() > 0){
-            randomIndex = random.nextInt(correctCities.size());
-            //removing city from cityList
-            CitiesGenerator.citiesForComputer.remove(randomIndex);
-            // adding used word to The List
-            ListOfCities.usedWords.add(correctCities.get(randomIndex));
-            return correctCities.get(randomIndex);
+
+        if(playerCity.charAt(playerCity.length()-1)=='ь'){
+            correctCities = computerCities.stream()
+                    .filter(c->c.charAt(0)==playerCity.charAt(playerCity.length()-2))
+                    .collect(Collectors.toList());
+        }else {
+            correctCities = computerCities.stream()
+                    .filter(c -> c.charAt(0) == playerCity.charAt(playerCity.length() - 1))
+                    .collect(Collectors.toList());
         }
-        return "computerLose";
+
+        if(correctCities.isEmpty()){
+            return null;
+        }
+
+        randomIndex = random.nextInt(correctCities.size());
+        return correctCities.get(randomIndex);
     }
 }
