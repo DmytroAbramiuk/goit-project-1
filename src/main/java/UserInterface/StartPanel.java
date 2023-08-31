@@ -6,113 +6,98 @@ import java.awt.*;
 
 public class StartPanel extends JPanel {
 
-    private final static int PANEL_WIDTH = 400;
-    private final static int PANEL_HEIGHT = 500;
-    private final static int START_BUTTON_HEIGHT = 35;
-    private final static int START_BUTTON_WIDTH = 130;
-    private final static int CITIES_LABEL_HEIGHT = 80;
-    private final static int CITIES_LABEL_WIDTH = 200;
-    private final static int USERNAME_FIELD_WIDTH = 170;
-    private final static int USERNAME_FIELD_HEIGHT = 35;
-    private final static int USERNAME_LABEL_WIDTH = 170;
-    private final static int USERNAME_LABEL_HEIGHT = 35;
+    JTextField usernameField;
+    JPanel gameplayPanel;
+    JButton startButton;
+    JLabel userNameLabel;
 
     public StartPanel() {
         initialize();
     }
 
     private void initialize() {
-        this.setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
+        this.setPreferredSize(new Dimension(SizesOfComponents.PANEL_WIDTH,
+                SizesOfComponents.PANEL_HEIGHT));
         this.setLayout(null);
-        this.setBackground(new Color(229, 171, 102, 186));
 
-        createStartButton();
-        createCitiesLabel();
-        createUsernameTextField();
-        createUsernameLabel();
+        LogoCreator.createCitiesLogo(this);
+        createGameplayPanel();
 
         this.setVisible(true);
     }
 
-    private void createCitiesLabel() {
-        Font font = new Font("Arial Black", Font.BOLD, 50);
-        JLabel citiesLabel = new JLabel("CITIES");
+    private void createGameplayPanel() {
+        gameplayPanel = new JPanel();
+        gameplayPanel.setBounds(0,
+                SizesOfComponents.PANEL_HEIGHT / 4,
+                400,
+                SizesOfComponents.PANEL_HEIGHT - SizesOfComponents.PANEL_HEIGHT / 4);
+        gameplayPanel.setLayout(new FlowLayout());
 
-        citiesLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        createUsernameLabel();
+        createUsernameField();
+        createStartButton();
 
-        citiesLabel.setFont(font);
-        citiesLabel.setBounds((PANEL_WIDTH / 2) - (CITIES_LABEL_WIDTH / 2),
-                10,
-                CITIES_LABEL_WIDTH,
-                CITIES_LABEL_HEIGHT);
-
-        this.add(citiesLabel);
+        this.add(gameplayPanel);
     }
 
     private void createStartButton() {
-        JButton startButton = new JButton("START GAME");
-        Font font = new Font("Arial Black", Font.BOLD, 12);
-        startButton.setFont(font);
-
-        startButton.setBounds((PANEL_WIDTH / 2) - (START_BUTTON_WIDTH / 2),
-                (PANEL_HEIGHT / 2) - (START_BUTTON_HEIGHT / 2),
-                START_BUTTON_WIDTH,
-                START_BUTTON_HEIGHT);
-
+        startButton = new JButton("START GAME");
+        startButton.setPreferredSize(new Dimension(SizesOfComponents.START_BUTTON_WIDTH,
+                SizesOfComponents.START_BUTTON_HEIGHT));
+        startButton.setFont(makeFont(12));
         startButton.setBorder(new LineBorder(Color.BLACK));
-        startButton.setBackground(new Color(229, 171, 102, 158));
 
-        eventListenerForStartButton(startButton);
+        eventListenerForStartButton();
 
-        this.add(startButton);
-    }
-
-    private void eventListenerForStartButton(JButton startButton){
-        startButton.addActionListener(e -> {
-            Container container = getRootPane().getContentPane();
-            container.setFocusable(false);
-            container.removeAll();
-
-            GamePanel gamePanel = new GamePanel();
-            container.add(gamePanel);
-
-            gamePanel.requestFocusInWindow();
-
-            validate();
-            repaint();
-
-            setVisible(true);
-            System.out.println("game was started!!!");
-        });
+        gameplayPanel.add(startButton);
     }
 
     private void createUsernameLabel() {
-        Font font = new Font("Arial Black", Font.BOLD, 15);
-        JLabel usernameLabel = new JLabel("Put your username");
-        usernameLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        userNameLabel = new JLabel("Put your username:");
+        userNameLabel.setFont(makeFont(15));
 
-        usernameLabel.setFont(font);
-        usernameLabel.setBounds((PANEL_WIDTH / 2) - (USERNAME_LABEL_WIDTH / 2),
-                PANEL_HEIGHT / 2 - (START_BUTTON_HEIGHT + USERNAME_LABEL_HEIGHT + USERNAME_FIELD_HEIGHT) + 10,
-                USERNAME_FIELD_WIDTH,
-                USERNAME_LABEL_HEIGHT);
-
-        this.add(usernameLabel);
+        gameplayPanel.add(userNameLabel);
     }
 
-    private void createUsernameTextField() {
-        JTextField usernameField = new JTextField();
-        usernameField.setBounds((PANEL_WIDTH / 2) - (USERNAME_FIELD_WIDTH / 2),
-                (PANEL_HEIGHT / 2) - (USERNAME_FIELD_HEIGHT / 2) - START_BUTTON_HEIGHT - 10,
-                USERNAME_FIELD_WIDTH,
-                USERNAME_FIELD_HEIGHT);
+    private void createUsernameField(){
+        usernameField = new JTextField();
+        usernameField.setFont(makeFont(15));
+        usernameField.setPreferredSize(new Dimension(SizesOfComponents.USERNAME_FIELD_WIDTH,
+                SizesOfComponents.USERNAME_FIELD_HEIGHT));
 
-        Font font = new Font("Arial Black", Font.BOLD, 20);
-        usernameField.setFont(font);
-
-        usernameField.setBorder(new LineBorder(Color.BLACK));
-        usernameField.setBackground(new Color(229, 171, 102, 158));
-
-        this.add(usernameField);
+        gameplayPanel.add(usernameField);
     }
+
+    private Font makeFont(int fontSize){
+        return new Font("Arial Black", Font.BOLD, fontSize);
+    }
+
+    private void eventListenerForStartButton(){
+        startButton.addActionListener(e -> {
+            if(usernameField.getText().isEmpty()){
+                JOptionPane.showMessageDialog(this, "Put your username to start game");
+            } else {
+                replacePanel();
+            }
+        });
+    }
+
+    private void replacePanel(){
+        Container container = getRootPane().getContentPane();
+        container.setFocusable(false);
+        container.removeAll();
+
+        GamePanel gamePanel = new GamePanel(usernameField.getText());
+        container.add(gamePanel);
+
+        gamePanel.requestFocusInWindow();
+
+        container.revalidate();
+        container.repaint();
+
+        setVisible(true);
+    }
+
+
 }

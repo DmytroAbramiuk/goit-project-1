@@ -1,6 +1,7 @@
 package UserInterface;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class MainFrame extends JFrame {
 
@@ -8,15 +9,13 @@ public class MainFrame extends JFrame {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
+        this.setTitle("Cities");
 
         StartPanel startPanel = new StartPanel();
-        this.add(startPanel);
-//        GamePanel gamePanel = new GamePanel();
-//        this.add(gamePanel);
-//        EndPanel endPanel = new EndPanel();
-//        this.add(endPanel);
+        this.add(startPanel, BorderLayout.CENTER);
 
         this.pack();
+        this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
 }
