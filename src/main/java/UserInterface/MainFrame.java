@@ -5,7 +5,7 @@ import java.awt.*;
 
 public class MainFrame extends JFrame {
 
-    public MainFrame(){
+    public MainFrame() {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
         this.setResizable(false);

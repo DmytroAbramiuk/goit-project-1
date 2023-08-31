@@ -1,7 +1,7 @@
 package Player;
 
 public class Player {
-    private String username;
+    private final String username;
     private int score;
 
     public Player(String username) {
@@ -11,5 +11,13 @@ public class Player {
 
     public void increaseScore(){
         this.score++;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public int getScore() {
+        return score;
     }
 }

@@ -1,6 +1,9 @@
 package UserInterface;
 
+import Computer.Computer;
+import ListOfCities.ListOfCities;
 import Player.Player;
+import Player.WordValidator;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -8,6 +11,7 @@ import java.awt.*;
 
 public class GamePanel extends JPanel {
     Player player;
+    Computer computer;
     JPanel computerPanel;
     JPanel userPanel;
     JTextField userTextField;
@@ -18,6 +22,7 @@ public class GamePanel extends JPanel {
 
     public GamePanel(String username) {
         this.player = new Player(username);
+        this.computer = new Computer();
         initialize();
     }
 
@@ -32,45 +37,118 @@ public class GamePanel extends JPanel {
         this.setVisible(true);
     }
 
-    private void createComputerPanel(){
+    private void createComputerPanel() {
         computerPanel = new JPanel();
-        computerPanel.setBounds(0,SizesOfComponents.PANEL_HEIGHT/2-70, 400,40);
+        computerPanel.setBounds(0, SizesOfComponents.PANEL_HEIGHT / 2 - 70, 400, 40);
         computerPanel.setLayout(new FlowLayout());
         computerPanel.setOpaque(false);
 
-        Font font = new Font("Arial Black", Font.BOLD, 20);
-
-        computerLabel = new JLabel("Computer:");
-        computerLabel.setFont(font);
-
-        cityFromComputerLabel = new JLabel("city");
-        cityFromComputerLabel.setFont(font);
-
-        computerPanel.add(computerLabel);
-        computerPanel.add(cityFromComputerLabel);
+        createComputerLabel();
+        createCityFromComputerLabel();
 
         this.add(computerPanel);
     }
 
-    private void createUserPanel(){
+    private void createComputerLabel(){
+        computerLabel = new JLabel("Computer:");
+        computerLabel.setFont(FontCreator.makeFont(20));
+
+        computerPanel.add(computerLabel);
+    }
+
+    private void createCityFromComputerLabel(){
+        cityFromComputerLabel = new JLabel();
+        cityFromComputerLabel.setFont(FontCreator.makeFont(20));
+
+        computerPanel.add(cityFromComputerLabel);
+    }
+
+    private void createUserPanel() {
         userPanel = new JPanel();
-        userPanel.setBounds(20,SizesOfComponents.PANEL_HEIGHT/2-30, 360,40);
+        userPanel.setBounds(20, SizesOfComponents.PANEL_HEIGHT / 2 - 30, 360, 40);
         userPanel.setLayout(new GridLayout());
         userPanel.setOpaque(false);
 
-        Font font = new Font("Arial Black", Font.BOLD, 20);
-
-        userTextField = new JTextField("your city");
-        userTextField.setFont(font);
-        userTextField.setBorder(new LineBorder(Color.BLACK));
-
-        stepButton = new JButton("Make Step");
-        stepButton.setFont(font);
-        stepButton.setBorder(new LineBorder(Color.BLACK));
-
-        userPanel.add(userTextField);
-        userPanel.add(stepButton);
+        createUserTextField();
+        createStepButton();
 
         this.add(userPanel);
+    }
+
+    private void createUserTextField(){
+        userTextField = new JTextField("your city");
+        userTextField.setFont(FontCreator.makeFont(20));
+        userTextField.setBorder(new LineBorder(Color.BLACK));
+
+        userPanel.add(userTextField);
+    }
+
+    private void createStepButton(){
+        stepButton = new JButton("Make Step");
+        stepButton.setFont(FontCreator.makeFont(20));
+        stepButton.setBorder(new LineBorder(Color.BLACK));
+
+        eventListenerForStepButton();
+
+        userPanel.add(stepButton);
+    }
+
+    private void eventListenerForStepButton(){
+        stepButton.addActionListener(e -> {
+            if(userTextField.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "You should type city to continue");
+            }
+            else{
+                processingCities();
+            }
+        });
+    }
+
+    private void processingCities(){
+        boolean isCityAllowed;
+        String playerCity = userTextField.getText().toLowerCase();
+        String computerCity;
+
+        if(playerCity.equalsIgnoreCase("здаюсь")){
+            JOptionPane.showMessageDialog(this, "You Loose!");
+            replacePanel();
+            return;
+        }
+
+        if(ListOfCities.usedCities.isEmpty()){
+            isCityAllowed = WordValidator.firstStepValidate(playerCity);
+        } else {
+            String currentComputerCity = computer.getCurrentCity();
+            isCityAllowed = WordValidator.validate(playerCity, currentComputerCity);
+        }
+
+        if(isCityAllowed){
+            player.increaseScore();
+            ListOfCities.usedCities.add(playerCity);
+            computerCity = computer.getNewCity(playerCity);
+            if(computerCity==null){
+                JOptionPane.showMessageDialog(this, "You Win!");
+                replacePanel();
+                return;
+            }
+            cityFromComputerLabel.setText(computerCity);
+        } else {
+            JOptionPane.showMessageDialog(this, "Your city does not exist!!!");
+        }
+    }
+
+
+    private void replacePanel(){
+        Container container = getRootPane().getContentPane();
+        container.setFocusable(false);
+        container.removeAll();
+
+        EndPanel endPanel = new EndPanel(player);
+        container.add(endPanel);
+
+        endPanel.requestFocusInWindow();
+
+        container.revalidate();
+        container.repaint();
     }
 }
