@@ -1,14 +1,14 @@
 package Player;
-import FileReader.FileReader;
+import ListOfCities.ListOfCities;
 
-import java.io.File;
-import java.util.Collection;
+
+import java.util.List;
 
 public class WordValidator {
     static boolean isPlayerWordFirst = true;
     // add File reader  here
-    static Collection<String> allCities = FileReader.readFile(new File("src/main/java/Files/Cities.txt"));
-    static Collection<String> usedWords;
+
+
     static int wordCounter = 0;
     public static boolean validate(String playerWord, String computerWord){
         computerWord = computerWord.toLowerCase();
@@ -18,24 +18,24 @@ public class WordValidator {
 
         }
         if(isPlayerWordFirst){
-            usedWords.add(playerWord);
+            ListOfCities.usedWords.add(playerWord);
             wordCounter++;
             isPlayerWordFirst = false;
             return true;
         }
-        if(isWordInList(usedWords,playerWord)){
+        if(isWordInList(ListOfCities.usedWords,playerWord)){
             return false;
         }
         if(isLetterMathing(playerWord,computerWord)){
-            if(isWordInList(allCities,playerWord)) {
-                usedWords.add(playerWord);
+            if(isWordInList(ListOfCities.allCities,playerWord)) {
+                ListOfCities.usedWords.add(playerWord);
                 wordCounter++;
                 return true;
             }
         }
         return false;
     }
-    private static boolean isWordInList(Collection<String> usedWords ,String playerWord){
+    private static boolean isWordInList(List<String> usedWords ,String playerWord){
         for (String usedWord:usedWords
              ) {
             if(usedWord.hashCode() == playerWord.hashCode()){
