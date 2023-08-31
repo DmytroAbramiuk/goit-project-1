@@ -23,7 +23,6 @@ public class WordValidator {
     }
 
     private static boolean isCityNotUsed(String playerCity){
-        boolean tralala = !(ListOfCities.usedCities.contains(playerCity));
         return !(ListOfCities.usedCities.contains(playerCity));
     }
 
