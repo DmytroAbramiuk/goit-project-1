@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class FileReader {
-    public static List<String> readFile(File file){
+    public static List<String> readFile(File file) {
         List<String> fileContent = new ArrayList<>();
         try {
             Scanner scanner = new Scanner(file);

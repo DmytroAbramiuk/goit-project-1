@@ -5,17 +5,17 @@ import ListOfCities.ListOfCities;
 import java.util.List;
 
 public class Computer {
-    private final List<String> computerCities;
+    protected static List<String> computerCities;
     private String currentCity;
 
     public Computer() {
-        this.computerCities = CitiesGenerator.getRandomCities();
+        computerCities = CitiesGenerator.getRandomCities();
     }
 
-    public String getNewCity(String playerCity){
-        this.currentCity = ComputerWordChooser.chooseCity(playerCity, computerCities);
+    public String getNewCity(String playerCity) {
+        this.currentCity = ComputerWordChooser.chooseCity(playerCity);
 
-        if(currentCity!=null){
+        if (currentCity != null) {
             computerCities.remove(currentCity);
             ListOfCities.usedCities.add(currentCity);
         }

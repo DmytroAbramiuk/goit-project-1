@@ -69,7 +69,6 @@ public class StartPanel extends JPanel {
     }
 
 
-
     private void eventListenerForStartButton() {
         startButton.addActionListener(e -> {
             if (usernameField.getText().isEmpty()) {

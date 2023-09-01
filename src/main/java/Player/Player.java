@@ -9,7 +9,7 @@ public class Player {
         this.score = 0;
     }
 
-    public void increaseScore(){
+    public void increaseScore() {
         this.score++;
     }
 
