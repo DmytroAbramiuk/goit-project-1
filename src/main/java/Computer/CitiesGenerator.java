@@ -7,7 +7,8 @@ import java.util.List;
 import java.util.Random;
 
 public class CitiesGenerator {
-    protected static List<String> citiesForComputer =new ArrayList<>();
+    protected static List<String> citiesForComputer = new ArrayList<>();
+
     public static List<String> getRandomCities() {
         int numberOfRandomCity = 200;
         Random random = new Random();

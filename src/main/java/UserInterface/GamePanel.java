@@ -49,14 +49,14 @@ public class GamePanel extends JPanel {
         this.add(computerPanel);
     }
 
-    private void createComputerLabel(){
+    private void createComputerLabel() {
         computerLabel = new JLabel("Computer:");
         computerLabel.setFont(FontCreator.makeFont(20));
 
         computerPanel.add(computerLabel);
     }
 
-    private void createCityFromComputerLabel(){
+    private void createCityFromComputerLabel() {
         cityFromComputerLabel = new JLabel();
         cityFromComputerLabel.setFont(FontCreator.makeFont(20));
 
@@ -75,15 +75,15 @@ public class GamePanel extends JPanel {
         this.add(userPanel);
     }
 
-    private void createUserTextField(){
-        userTextField = new JTextField("your city");
+    private void createUserTextField() {
+        userTextField = new JTextField("");
         userTextField.setFont(FontCreator.makeFont(20));
         userTextField.setBorder(new LineBorder(Color.BLACK));
 
         userPanel.add(userTextField);
     }
 
-    private void createStepButton(){
+    private void createStepButton() {
         stepButton = new JButton("Make Step");
         stepButton.setFont(FontCreator.makeFont(20));
         stepButton.setBorder(new LineBorder(Color.BLACK));
@@ -93,52 +93,65 @@ public class GamePanel extends JPanel {
         userPanel.add(stepButton);
     }
 
-    private void eventListenerForStepButton(){
+    private void eventListenerForStepButton() {
         stepButton.addActionListener(e -> {
-            if(userTextField.getText().isEmpty()) {
+            if (userTextField.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(this, "You should type city to continue");
-            }
-            else{
+            } else {
                 processingCities();
             }
         });
     }
 
-    private void processingCities(){
-        boolean isCityAllowed;
+    private void processingCities() {
         String playerCity = userTextField.getText().toLowerCase();
-        String computerCity;
 
-        if(playerCity.equalsIgnoreCase("здаюсь")){
+        if (playerCity.equalsIgnoreCase("здаюсь")) {
             JOptionPane.showMessageDialog(this, "You Loose!");
             replacePanel();
             return;
         }
 
-        if(ListOfCities.usedCities.isEmpty()){
-            isCityAllowed = WordValidator.firstStepValidate(playerCity);
-        } else {
-            String currentComputerCity = computer.getCurrentCity();
-            isCityAllowed = WordValidator.validate(playerCity, currentComputerCity);
-        }
-
-        if(isCityAllowed){
-            player.increaseScore();
-            ListOfCities.usedCities.add(playerCity);
-            computerCity = computer.getNewCity(playerCity);
-            if(computerCity==null){
-                JOptionPane.showMessageDialog(this, "You Win!");
-                replacePanel();
-                return;
-            }
-            cityFromComputerLabel.setText(computerCity);
+        if (isCityAllowed(playerCity)) {
+            correctPlayerStep(playerCity);
+            computerStep(playerCity);
         } else {
             JOptionPane.showMessageDialog(this, "Your city does not exist!!!");
         }
     }
 
+    private void computerStep(String playerCity){
+        String computerCity;
 
-    private void replacePanel(){
+        computerCity = computer.getNewCity(playerCity);
+        if (computerCity == null) {
+            JOptionPane.showMessageDialog(this, "You Win!");
+            replacePanel();
+            return;
+        }
+        cityFromComputerLabel.setText(convertFirstLetterInComputerCity(computerCity));
+    }
+
+    private String convertFirstLetterInComputerCity(String computerCity){
+        return ("" + computerCity.charAt(0)).toUpperCase() + computerCity.substring(1);
+    }
+
+    private void correctPlayerStep(String playerCity){
+        player.increaseScore();
+        ListOfCities.usedCities.add(playerCity);
+        userTextField.setText("");
+    }
+
+    private boolean isCityAllowed(String playerCity){
+        if (ListOfCities.usedCities.isEmpty()) {
+            return WordValidator.firstStepValidate(playerCity);
+        } else {
+            return WordValidator.validate(playerCity, computer.getCurrentCity());
+        }
+    }
+
+
+    private void replacePanel() {
         Container container = getRootPane().getContentPane();
         container.setFocusable(false);
         container.removeAll();

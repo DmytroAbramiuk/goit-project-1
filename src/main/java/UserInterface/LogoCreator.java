@@ -1,5 +1,7 @@
 package UserInterface;
 
+import Computer.Computer;
+
 import javax.swing.*;
 import java.awt.*;
 

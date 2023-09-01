@@ -26,9 +26,9 @@ public class EndPanel extends JPanel {
         this.setVisible(true);
     }
 
-    private void createResultsLabel(){
+    private void createResultsLabel() {
         JLabel resultsLabel = new JLabel("Results");
-        resultsLabel.setBounds(0,0,PANEL_WIDTH, PANEL_HEIGHT/5);
+        resultsLabel.setBounds(0, 0, PANEL_WIDTH, PANEL_HEIGHT / 5);
         resultsLabel.setOpaque(false);
 
         resultsLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -40,10 +40,10 @@ public class EndPanel extends JPanel {
         this.add(resultsLabel);
     }
 
-    private void createScoreBoardPanel(){
+    private void createScoreBoardPanel() {
         JPanel scoreboardPanel = new JPanel();
-        scoreboardPanel.setBounds(0,PANEL_HEIGHT/5,PANEL_WIDTH,PANEL_HEIGHT-PANEL_HEIGHT/5);
-        scoreboardPanel.setLayout(new GridLayout(2,1));
+        scoreboardPanel.setBounds(0, PANEL_HEIGHT / 5, PANEL_WIDTH, PANEL_HEIGHT - PANEL_HEIGHT / 5);
+        scoreboardPanel.setLayout(new GridLayout(2, 1));
         scoreboardPanel.setOpaque(false);
 
         JLabel playerUsernameLabel = new JLabel(player.getUsername());
