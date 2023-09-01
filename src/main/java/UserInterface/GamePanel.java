@@ -107,7 +107,8 @@ public class GamePanel extends JPanel {
         String playerCity = userTextField.getText().toLowerCase();
 
         if (playerCity.equalsIgnoreCase("здаюсь")) {
-            JOptionPane.showMessageDialog(this, "You Loose!");
+            JOptionPane.showMessageDialog(this, "Game Over!");
+            player.setStatus("Loose");
             replacePanel();
             return;
         }
@@ -125,19 +126,22 @@ public class GamePanel extends JPanel {
 
         computerCity = computer.getNewCity(playerCity);
         if (computerCity == null) {
-            JOptionPane.showMessageDialog(this, "You Win!");
+            JOptionPane.showMessageDialog(this, "Game over!");
+            player.setStatus("Won!");
             replacePanel();
             return;
         }
-        cityFromComputerLabel.setText(convertFirstLetterInComputerCity(computerCity));
+        cityFromComputerLabel.setText(convertFirstLetterInCity(computerCity));
+        computer.saveComputerCity(convertFirstLetterInCity(computerCity));
     }
 
-    private String convertFirstLetterInComputerCity(String computerCity){
+    private String convertFirstLetterInCity(String computerCity){
         return ("" + computerCity.charAt(0)).toUpperCase() + computerCity.substring(1);
     }
 
     private void correctPlayerStep(String playerCity){
         player.increaseScore();
+        player.savePlayerCity(convertFirstLetterInCity(playerCity));
         ListOfCities.usedCities.add(playerCity);
         userTextField.setText("");
     }
@@ -156,7 +160,7 @@ public class GamePanel extends JPanel {
         container.setFocusable(false);
         container.removeAll();
 
-        EndPanel endPanel = new EndPanel(player);
+        EndPanel endPanel = new EndPanel(player, computer);
         container.add(endPanel);
 
         endPanel.requestFocusInWindow();
