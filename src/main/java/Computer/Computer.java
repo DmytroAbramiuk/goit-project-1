@@ -2,11 +2,13 @@ package Computer;
 
 import ListOfCities.ListOfCities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Computer {
     protected static List<String> computerCities;
     private String currentCity;
+    private List<String> usedComputerCities;
 
     public Computer() {
         computerCities = CitiesGenerator.getRandomCities();
@@ -24,5 +26,16 @@ public class Computer {
 
     public String getCurrentCity() {
         return currentCity;
+    }
+
+    public void saveComputerCity(String computerCity){
+        if(usedComputerCities==null)
+            usedComputerCities = new ArrayList<>();
+
+        usedComputerCities.add(computerCity);
+    }
+
+    public List<String> getUsedComputerCities() {
+        return usedComputerCities;
     }
 }
