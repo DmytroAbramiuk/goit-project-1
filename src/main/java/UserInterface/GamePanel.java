@@ -5,20 +5,28 @@ import ListOfCities.ListOfCities;
 import Player.Player;
 import Player.WordValidator;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 public class GamePanel extends JPanel {
-    Player player;
-    Computer computer;
-    JPanel computerPanel;
-    JPanel userPanel;
-    JTextField userTextField;
-    JButton stepButton;
+    private Player player;
+    private Computer computer;
+    private JPanel computerPanel;
+    private JPanel userPanel;
+    private JTextField userTextField;
+    private  JButton stepButton;
+    private BufferedImage backgroundImage;
+    JButton surrenderButton;
     JLabel computerLabel;
-    JLabel cityFromComputerLabel;
-
 
     public GamePanel(String username) {
         this.player = new Player(username);
@@ -28,25 +36,40 @@ public class GamePanel extends JPanel {
 
     private void initialize() {
         this.setPreferredSize(new Dimension(SizesOfComponents.PANEL_WIDTH, SizesOfComponents.PANEL_HEIGHT));
-        GameBackgroundCreator.createBackground(this);
         this.setLayout(null);
 
         LogoCreator.createCitiesLogo(this);
+        createBackground();
         createComputerPanel();
         createUserPanel();
 
         this.setVisible(true);
     }
 
+    private void createBackground(){
+        try {
+            backgroundImage = ImageIO.read(new File("src/main/java/Files/background.png"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+
+        if (backgroundImage != null) {
+            g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
+        }
+    }
+
     private void createComputerPanel() {
         computerPanel = new JPanel();
         computerPanel.setBounds(0, SizesOfComponents.PANEL_HEIGHT / 2 - 70, 400, 40);
-        computerPanel.setOpaque(false);
+        computerPanel.setBackground(Color.black);
         computerPanel.setLayout(new FlowLayout());
-        computerPanel.setOpaque(false);
 
         createComputerLabel();
-        createCityFromComputerLabel();
 
         this.add(computerPanel);
     }
@@ -54,15 +77,9 @@ public class GamePanel extends JPanel {
     private void createComputerLabel() {
         computerLabel = new JLabel("Computer:");
         computerLabel.setFont(FontCreator.makeFont(20));
+        computerLabel.setForeground(DefaultColors.backgroundColor);
 
         computerPanel.add(computerLabel);
-    }
-
-    private void createCityFromComputerLabel() {
-        cityFromComputerLabel = new JLabel();
-        cityFromComputerLabel.setFont(FontCreator.makeFont(20));
-
-        computerPanel.add(cityFromComputerLabel);
     }
 
     private void createUserPanel() {
@@ -84,17 +101,22 @@ public class GamePanel extends JPanel {
         userTextField.setPreferredSize(new Dimension(SizesOfComponents.USER_TEXT_FIELD_WIDTH,
                 SizesOfComponents.USER_GAME_COMPONENTS_HEIGHT));
         userTextField.setFont(FontCreator.makeFont(20));
-        userTextField.setBorder(new LineBorder(Color.BLACK));
+        userTextField.setBorder(new LineBorder(DefaultColors.backgroundColor));
+        userTextField.setBackground(Color.black);
+        userTextField.setForeground(DefaultColors.backgroundColor);
+
+        userTextField.addActionListener(e -> repaint());
 
         userPanel.add(userTextField);
     }
 
     private void createStepButton() {
-        stepButton = new JButton("Step");
+        stepButton = new JButton();
         stepButton.setPreferredSize(new Dimension(SizesOfComponents.USER_STEP_BUTTON_WIDTH,
                 SizesOfComponents.USER_GAME_COMPONENTS_HEIGHT));
-        stepButton.setFont(FontCreator.makeFont(20));
-        stepButton.setBorder(new LineBorder(Color.BLACK));
+        stepButton.setBorder(new ButtonStyle(50, "STEP"));
+        stepButton.setBackground(DefaultColors.transparent);
+        stepButton.setForeground(DefaultColors.backgroundColor);
 
         eventListenerForStepButton();
 
@@ -102,18 +124,32 @@ public class GamePanel extends JPanel {
     }
 
     private void createSurrenderButton() {
-        JButton surrenderButton = new JButton("Surrender");
+        surrenderButton = new JButton("Surrender");
         surrenderButton.setPreferredSize(new Dimension(150, SizesOfComponents.USER_GAME_COMPONENTS_HEIGHT));
         surrenderButton.setFont(FontCreator.makeFont(20));
-        surrenderButton.setBorder(new LineBorder(Color.BLACK));
+        surrenderButton.setBorder(new ButtonStyle(50, "Surrender"));
+        surrenderButton.setBackground(DefaultColors.transparent);
+        surrenderButton.setForeground(DefaultColors.backgroundColor);
 
+        eventListenerForSurrenderButton();
+
+        userPanel.add(surrenderButton);
+    }
+
+    private void eventListenerForSurrenderButton() {
         surrenderButton.addActionListener(e -> {
             player.setStatus("Loose");
             replacePanel();
-            JOptionPane.showMessageDialog(this, "Game Over!");
+            ShadowRemover.removeShadow(surrenderButton);
+            JOptionPane.showMessageDialog(this, "Game was ended!");
         });
 
-        userPanel.add(surrenderButton);
+        surrenderButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                ShadowRemover.removeShadow(surrenderButton);
+            }
+        });
     }
 
     private void eventListenerForStepButton() {
@@ -122,6 +158,14 @@ public class GamePanel extends JPanel {
                 JOptionPane.showMessageDialog(this, "You should type city to continue");
             } else {
                 processingCities();
+            }
+            ShadowRemover.removeShadow(stepButton);
+        });
+
+        stepButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                ShadowRemover.removeShadow(stepButton);
             }
         });
     }
@@ -142,12 +186,12 @@ public class GamePanel extends JPanel {
 
         computerCity = computer.getNewCity(playerCity);
         if (computerCity == null) {
-            JOptionPane.showMessageDialog(this, "Game over!");
+            JOptionPane.showMessageDialog(this, "Game was ended!");
             player.setStatus("Won!");
             replacePanel();
             return;
         }
-        cityFromComputerLabel.setText(convertFirstLetterInCity(computerCity));
+        computerLabel.setText("Computer: " + convertFirstLetterInCity(computerCity));
         computer.saveComputerCity(convertFirstLetterInCity(computerCity));
     }
 
