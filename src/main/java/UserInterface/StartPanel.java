@@ -7,7 +7,7 @@ import java.awt.*;
 public class StartPanel extends JPanel {
 
     private JTextField usernameField;
-    private JPanel gameplayPanel;
+    private JPanel startPanel;
     private JButton startButton;
 
     public StartPanel() {
@@ -17,27 +17,29 @@ public class StartPanel extends JPanel {
     private void initialize() {
         this.setPreferredSize(new Dimension(SizesOfComponents.PANEL_WIDTH,
                 SizesOfComponents.PANEL_HEIGHT));
+        GameBackgroundCreator.createBackground(this);
         this.setLayout(null);
 
         LogoCreator.createCitiesLogo(this);
-        createGameplayPanel();
+        createStartPanel();
 
         this.setVisible(true);
     }
 
-    private void createGameplayPanel() {
-        gameplayPanel = new JPanel();
-        gameplayPanel.setBounds(0,
+    private void createStartPanel() {
+        startPanel = new JPanel();
+        startPanel.setBounds(0,
                 SizesOfComponents.PANEL_HEIGHT / 4,
                 400,
                 SizesOfComponents.PANEL_HEIGHT - SizesOfComponents.PANEL_HEIGHT / 4);
-        gameplayPanel.setLayout(new FlowLayout());
+        startPanel.setOpaque(false);
+        startPanel.setLayout(new FlowLayout());
 
         createUsernameLabel();
         createUsernameField();
         createStartButton();
 
-        this.add(gameplayPanel);
+        this.add(startPanel);
     }
 
     private void createStartButton() {
@@ -49,14 +51,14 @@ public class StartPanel extends JPanel {
 
         eventListenerForStartButton();
 
-        gameplayPanel.add(startButton);
+        startPanel.add(startButton);
     }
 
     private void createUsernameLabel() {
         JLabel userNameLabel = new JLabel("Put your username:");
         userNameLabel.setFont(FontCreator.makeFont(15));
 
-        gameplayPanel.add(userNameLabel);
+        startPanel.add(userNameLabel);
     }
 
     private void createUsernameField() {
@@ -65,7 +67,7 @@ public class StartPanel extends JPanel {
         usernameField.setPreferredSize(new Dimension(SizesOfComponents.USERNAME_FIELD_WIDTH,
                 SizesOfComponents.USERNAME_FIELD_HEIGHT));
 
-        gameplayPanel.add(usernameField);
+        startPanel.add(usernameField);
     }
 
 

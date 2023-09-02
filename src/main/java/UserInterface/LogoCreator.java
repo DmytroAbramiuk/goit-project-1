@@ -8,6 +8,7 @@ public class LogoCreator extends JPanel {
         JPanel citiesPanel = new JPanel();
         citiesPanel.setBounds(0, 0, 400, SizesOfComponents.PANEL_HEIGHT / 5);
         citiesPanel.setLayout(new FlowLayout());
+        citiesPanel.setOpaque(false);
 
         Font font = new Font("Arial Black", Font.BOLD, 50);
         JLabel citiesLabel = new JLabel("CITIES");
