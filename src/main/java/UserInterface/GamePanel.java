@@ -16,7 +16,6 @@ public class GamePanel extends JPanel {
     JPanel userPanel;
     JTextField userTextField;
     JButton stepButton;
-    JButton surrenderButton;
     JLabel computerLabel;
     JLabel cityFromComputerLabel;
 

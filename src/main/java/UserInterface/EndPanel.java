@@ -5,7 +5,6 @@ import Convertor.UsedWordsConvertor;
 import Player.Player;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 
@@ -121,16 +120,14 @@ public class EndPanel extends JPanel {
     private void createPlayerCitiesLabel(){
         JLabel playerCitiesLabel = new JLabel(UsedWordsConvertor.convert(player.getUsedPlayerCities()));
 
-
         JScrollPane playerCitiesScrollPane = new JScrollPane(playerCitiesLabel);
         playerCitiesScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
 
-        //playerCitiesLabel.setBorder(new LineBorder(Color.BLACK));
         playerCitiesLabel.setFont(FontCreator.makeFont(15));
         playerCitiesLabel.setVerticalAlignment(SwingConstants.TOP);
 
         playerCitiesScrollPane.setOpaque(false);
-        playerCitiesLabel.setOpaque(false);
+        playerCitiesScrollPane.getViewport().setOpaque(false);
 
         bottomPanel.add(playerCitiesScrollPane);
     }
@@ -141,13 +138,11 @@ public class EndPanel extends JPanel {
         JScrollPane computerCitiesScrollPane = new JScrollPane(computerCitiesLabel);
         computerCitiesScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
 
-        //computerCitiesLabel.setBorder(new LineBorder(Color.BLACK));
         computerCitiesLabel.setFont(FontCreator.makeFont(15));
         computerCitiesLabel.setVerticalAlignment(SwingConstants.TOP);
 
         computerCitiesScrollPane.setOpaque(false);
-        computerCitiesLabel.setOpaque(false);
-
+        computerCitiesScrollPane.getViewport().setOpaque(false);
 
         bottomPanel.add(computerCitiesScrollPane);
     }

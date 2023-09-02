@@ -21,6 +21,7 @@ public class StartPanel extends JPanel {
         this.setLayout(null);
 
         LogoCreator.createCitiesLogo(this);
+
         createStartPanel();
 
         this.setVisible(true);
