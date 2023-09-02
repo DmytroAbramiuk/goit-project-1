@@ -4,9 +4,13 @@ import Computer.Computer;
 import Convertor.UsedWordsConvertor;
 import Player.Player;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 public class EndPanel extends JPanel {
     private final static int PANEL_WIDTH = 400;
@@ -16,6 +20,7 @@ public class EndPanel extends JPanel {
     JPanel resultWordListPanel;
     JPanel bottomPanel;
     JPanel topPanel;
+    private BufferedImage backgroundImage;
 
     public EndPanel(Player player, Computer computer) {
         this.player = player;
@@ -25,14 +30,31 @@ public class EndPanel extends JPanel {
 
     private void initialize() {
         this.setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
-        GameBackgroundCreator.createBackground(this);
         this.setLayout(null);
 
+        createBackground();
         createResultsLabel();
         createScoreBoardPanel();
         createResultWordListsPanel();
 
         this.setVisible(true);
+    }
+
+    private void createBackground() {
+        try {
+            backgroundImage = ImageIO.read(new File("src/main/java/Files/background.png"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+
+        if (backgroundImage != null) {
+            g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
+        }
     }
 
     private void createResultsLabel() {
@@ -55,8 +77,8 @@ public class EndPanel extends JPanel {
         scoreboardPanel.setOpaque(false);
 
         String lastWord = " words";
-        if(player.getScore()==1)
-            lastWord=" word";
+        if (player.getScore() == 1)
+            lastWord = " word";
 
         JLabel playerResultsLabel = new JLabel(player.getUsername() + " " + player.getStatus() + " with " + player.getScore() + lastWord);
         playerResultsLabel.setFont(FontCreator.makeFont(15));
@@ -78,7 +100,7 @@ public class EndPanel extends JPanel {
         this.add(resultWordListPanel);
     }
 
-    private void createTopPanel(){
+    private void createTopPanel() {
         topPanel = new JPanel();
         topPanel.setLayout(new GridLayout(1, 2));
         topPanel.setOpaque(false);
@@ -89,7 +111,7 @@ public class EndPanel extends JPanel {
         resultWordListPanel.add(topPanel, BorderLayout.NORTH);
     }
 
-    private void createPlayerLabel(){
+    private void createPlayerLabel() {
         JLabel playerLabel = new JLabel("Player cities");
         playerLabel.setFont(FontCreator.makeFont(15));
         playerLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -97,7 +119,7 @@ public class EndPanel extends JPanel {
         topPanel.add(playerLabel);
     }
 
-    private void createComputerLabel(){
+    private void createComputerLabel() {
         JLabel computerLabel = new JLabel("Computer cities");
         computerLabel.setFont(FontCreator.makeFont(15));
         computerLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -105,7 +127,7 @@ public class EndPanel extends JPanel {
         topPanel.add(computerLabel);
     }
 
-    private void createBottomPanel(){
+    private void createBottomPanel() {
         bottomPanel = new JPanel();
         bottomPanel.setLayout(new GridLayout(1, 2));
 
@@ -117,7 +139,7 @@ public class EndPanel extends JPanel {
         resultWordListPanel.add(bottomPanel, BorderLayout.CENTER);
     }
 
-    private void createPlayerCitiesLabel(){
+    private void createPlayerCitiesLabel() {
         JLabel playerCitiesLabel = new JLabel(UsedWordsConvertor.convert(player.getUsedPlayerCities()));
 
         JScrollPane playerCitiesScrollPane = new JScrollPane(playerCitiesLabel);
@@ -125,6 +147,7 @@ public class EndPanel extends JPanel {
 
         playerCitiesLabel.setFont(FontCreator.makeFont(15));
         playerCitiesLabel.setVerticalAlignment(SwingConstants.TOP);
+        playerCitiesLabel.setBorder(new LineBorder(Color.BLACK));
 
         playerCitiesScrollPane.setOpaque(false);
         playerCitiesScrollPane.getViewport().setOpaque(false);
@@ -132,7 +155,7 @@ public class EndPanel extends JPanel {
         bottomPanel.add(playerCitiesScrollPane);
     }
 
-    private void createComputerCitiesLabel(){
+    private void createComputerCitiesLabel() {
         JLabel computerCitiesLabel = new JLabel(UsedWordsConvertor.convert(computer.getUsedComputerCities()));
 
         JScrollPane computerCitiesScrollPane = new JScrollPane(computerCitiesLabel);
@@ -140,6 +163,7 @@ public class EndPanel extends JPanel {
 
         computerCitiesLabel.setFont(FontCreator.makeFont(15));
         computerCitiesLabel.setVerticalAlignment(SwingConstants.TOP);
+        computerCitiesLabel.setBorder(new LineBorder(Color.BLACK));
 
         computerCitiesScrollPane.setOpaque(false);
         computerCitiesScrollPane.getViewport().setOpaque(false);

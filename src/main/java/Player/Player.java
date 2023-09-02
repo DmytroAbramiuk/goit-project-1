@@ -26,8 +26,8 @@ public class Player {
         return score;
     }
 
-    public void savePlayerCity(String playerCity){
-        if(usedPlayerCities==null)
+    public void savePlayerCity(String playerCity) {
+        if (usedPlayerCities == null)
             usedPlayerCities = new ArrayList<>();
 
         usedPlayerCities.add(playerCity);
@@ -41,7 +41,7 @@ public class Player {
         return status;
     }
 
-    public void setStatus(String status){
+    public void setStatus(String status) {
         this.status = status;
     }
 }

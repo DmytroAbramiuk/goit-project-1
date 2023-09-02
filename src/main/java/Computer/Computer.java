@@ -28,8 +28,8 @@ public class Computer {
         return currentCity;
     }
 
-    public void saveComputerCity(String computerCity){
-        if(usedComputerCities==null)
+    public void saveComputerCity(String computerCity) {
+        if (usedComputerCities == null)
             usedComputerCities = new ArrayList<>();
 
         usedComputerCities.add(computerCity);
