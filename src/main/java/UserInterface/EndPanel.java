@@ -5,10 +5,8 @@ import Convertor.UsedWordsConvertor;
 import Player.Player;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import java.awt.*;
-import java.util.List;
 
 public class EndPanel extends JPanel {
     private final static int PANEL_WIDTH = 400;
@@ -27,6 +25,7 @@ public class EndPanel extends JPanel {
 
     private void initialize() {
         this.setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
+        GameBackgroundCreator.createBackground(this);
         this.setLayout(null);
 
         createResultsLabel();
@@ -59,10 +58,10 @@ public class EndPanel extends JPanel {
         if(player.getScore()==1)
             lastWord=" word";
 
-        JLabel playerUsernameLabel = new JLabel(player.getUsername() + " " + player.getStatus() + " with " + player.getScore() + lastWord);
-        playerUsernameLabel.setFont(FontCreator.makeFont(15));
+        JLabel playerResultsLabel = new JLabel(player.getUsername() + " " + player.getStatus() + " with " + player.getScore() + lastWord);
+        playerResultsLabel.setFont(FontCreator.makeFont(15));
 
-        scoreboardPanel.add(playerUsernameLabel);
+        scoreboardPanel.add(playerResultsLabel);
 
         this.add(scoreboardPanel);
     }
@@ -71,6 +70,7 @@ public class EndPanel extends JPanel {
         resultWordListPanel = new JPanel();
         resultWordListPanel.setLayout(new BorderLayout());
         resultWordListPanel.setBounds(0, PANEL_HEIGHT / 5 + 20, PANEL_WIDTH, PANEL_HEIGHT - (PANEL_HEIGHT / 5 + 20));
+        resultWordListPanel.setOpaque(false);
 
         createTopPanel();
         createBottomPanel();
@@ -81,6 +81,7 @@ public class EndPanel extends JPanel {
     private void createTopPanel(){
         topPanel = new JPanel();
         topPanel.setLayout(new GridLayout(1, 2));
+        topPanel.setOpaque(false);
 
         createPlayerLabel();
         createComputerLabel();
@@ -108,6 +109,8 @@ public class EndPanel extends JPanel {
         bottomPanel = new JPanel();
         bottomPanel.setLayout(new GridLayout(1, 2));
 
+        bottomPanel.setOpaque(false);
+
         createPlayerCitiesLabel();
         createComputerCitiesLabel();
 
@@ -115,28 +118,32 @@ public class EndPanel extends JPanel {
     }
 
     private void createPlayerCitiesLabel(){
-        JLabel playerWordsLabel = new JLabel(UsedWordsConvertor.convert(player.getUsedPlayerCities()));
+        JLabel playerCitiesLabel = new JLabel(UsedWordsConvertor.convert(player.getUsedPlayerCities()));
 
-        JScrollPane playerWordsScrollPane = new JScrollPane(playerWordsLabel);
-        playerWordsScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+        JScrollPane playerCitiesScrollPane = new JScrollPane(playerCitiesLabel);
+        playerCitiesScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
 
-        playerWordsLabel.setBorder(new LineBorder(Color.BLACK));
-        playerWordsLabel.setFont(FontCreator.makeFont(15));
-        playerWordsLabel.setVerticalAlignment(SwingConstants.TOP);
+        playerCitiesLabel.setFont(FontCreator.makeFont(15));
+        playerCitiesLabel.setVerticalAlignment(SwingConstants.TOP);
 
-        bottomPanel.add(playerWordsScrollPane);
+        playerCitiesScrollPane.setOpaque(false);
+        playerCitiesScrollPane.getViewport().setOpaque(false);
+
+        bottomPanel.add(playerCitiesScrollPane);
     }
 
     private void createComputerCitiesLabel(){
-        JLabel computerWordsLabel = new JLabel(UsedWordsConvertor.convert(computer.getUsedComputerCities()));
+        JLabel computerCitiesLabel = new JLabel(UsedWordsConvertor.convert(computer.getUsedComputerCities()));
 
-        JScrollPane computerWordsScrollPane = new JScrollPane(computerWordsLabel);
-        computerWordsScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+        JScrollPane computerCitiesScrollPane = new JScrollPane(computerCitiesLabel);
+        computerCitiesScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
 
-        computerWordsLabel.setBorder(new LineBorder(Color.BLACK));
-        computerWordsLabel.setFont(FontCreator.makeFont(15));
-        computerWordsLabel.setVerticalAlignment(SwingConstants.TOP);
+        computerCitiesLabel.setFont(FontCreator.makeFont(15));
+        computerCitiesLabel.setVerticalAlignment(SwingConstants.TOP);
 
-        bottomPanel.add(computerWordsScrollPane);
+        computerCitiesScrollPane.setOpaque(false);
+        computerCitiesScrollPane.getViewport().setOpaque(false);
+
+        bottomPanel.add(computerCitiesScrollPane);
     }
 }
