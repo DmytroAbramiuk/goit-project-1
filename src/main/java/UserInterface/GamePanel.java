@@ -16,6 +16,7 @@ public class GamePanel extends JPanel {
     JPanel userPanel;
     JTextField userTextField;
     JButton stepButton;
+    JButton surrenderButton;
     JLabel computerLabel;
     JLabel cityFromComputerLabel;
 
@@ -33,6 +34,7 @@ public class GamePanel extends JPanel {
         LogoCreator.createCitiesLogo(this);
         createComputerPanel();
         createUserPanel();
+        createSurrenderButton();
 
         this.setVisible(true);
     }
@@ -73,6 +75,20 @@ public class GamePanel extends JPanel {
         createStepButton();
 
         this.add(userPanel);
+    }
+
+    private void createSurrenderButton() {
+        JButton surrenderButton = new JButton("Surrender");
+        surrenderButton.setFont(FontCreator.makeFont(20));
+        surrenderButton.setBorder(new LineBorder(Color.BLACK));
+
+        surrenderButton.addActionListener(e -> {
+            player.setStatus("Loose");
+            replacePanel();
+            JOptionPane.showMessageDialog(this, "Game Over!");
+        });
+
+        userPanel.add(surrenderButton);
     }
 
     private void createUserTextField() {
