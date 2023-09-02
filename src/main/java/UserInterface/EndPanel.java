@@ -40,7 +40,7 @@ public class EndPanel extends JPanel {
         this.setVisible(true);
     }
 
-    private void createBackground(){
+    private void createBackground() {
         try {
             backgroundImage = ImageIO.read(new File("src/main/java/Files/background.png"));
         } catch (IOException e) {
@@ -77,8 +77,8 @@ public class EndPanel extends JPanel {
         scoreboardPanel.setOpaque(false);
 
         String lastWord = " words";
-        if(player.getScore()==1)
-            lastWord=" word";
+        if (player.getScore() == 1)
+            lastWord = " word";
 
         JLabel playerResultsLabel = new JLabel(player.getUsername() + " " + player.getStatus() + " with " + player.getScore() + lastWord);
         playerResultsLabel.setFont(FontCreator.makeFont(15));
@@ -100,7 +100,7 @@ public class EndPanel extends JPanel {
         this.add(resultWordListPanel);
     }
 
-    private void createTopPanel(){
+    private void createTopPanel() {
         topPanel = new JPanel();
         topPanel.setLayout(new GridLayout(1, 2));
         topPanel.setOpaque(false);
@@ -111,7 +111,7 @@ public class EndPanel extends JPanel {
         resultWordListPanel.add(topPanel, BorderLayout.NORTH);
     }
 
-    private void createPlayerLabel(){
+    private void createPlayerLabel() {
         JLabel playerLabel = new JLabel("Player cities");
         playerLabel.setFont(FontCreator.makeFont(15));
         playerLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -119,7 +119,7 @@ public class EndPanel extends JPanel {
         topPanel.add(playerLabel);
     }
 
-    private void createComputerLabel(){
+    private void createComputerLabel() {
         JLabel computerLabel = new JLabel("Computer cities");
         computerLabel.setFont(FontCreator.makeFont(15));
         computerLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -127,7 +127,7 @@ public class EndPanel extends JPanel {
         topPanel.add(computerLabel);
     }
 
-    private void createBottomPanel(){
+    private void createBottomPanel() {
         bottomPanel = new JPanel();
         bottomPanel.setLayout(new GridLayout(1, 2));
 
@@ -139,7 +139,7 @@ public class EndPanel extends JPanel {
         resultWordListPanel.add(bottomPanel, BorderLayout.CENTER);
     }
 
-    private void createPlayerCitiesLabel(){
+    private void createPlayerCitiesLabel() {
         JLabel playerCitiesLabel = new JLabel(UsedWordsConvertor.convert(player.getUsedPlayerCities()));
 
         JScrollPane playerCitiesScrollPane = new JScrollPane(playerCitiesLabel);
@@ -155,7 +155,7 @@ public class EndPanel extends JPanel {
         bottomPanel.add(playerCitiesScrollPane);
     }
 
-    private void createComputerCitiesLabel(){
+    private void createComputerCitiesLabel() {
         JLabel computerCitiesLabel = new JLabel(UsedWordsConvertor.convert(computer.getUsedComputerCities()));
 
         JScrollPane computerCitiesScrollPane = new JScrollPane(computerCitiesLabel);

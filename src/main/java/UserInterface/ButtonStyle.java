@@ -7,7 +7,6 @@ import java.awt.geom.RoundRectangle2D;
 public class ButtonStyle implements Border {
     private final int arc;
     private final String buttonText;
-    private final int fontSize = 20;
 
     public ButtonStyle(int arc, String buttonText) {
         this.buttonText = buttonText;
@@ -22,12 +21,14 @@ public class ButtonStyle implements Border {
         g2d.draw(new RoundRectangle2D.Double(x, y, width - 1, height - 1, arc, arc));
         g2d.fill(new RoundRectangle2D.Double(x, y, width - 1, height - 1, arc, arc));
         g2d.setColor(c.getForeground());
+
+        int fontSize = 20;
         g2d.setFont(FontCreator.makeFont(fontSize));
-        g2d.drawString(buttonText, x+(width - calculateX(g2d))/2,y+height/2+7);
+        g2d.drawString(buttonText, x + (width - calculateX(g2d)) / 2, y + height / 2 + 7);
         g2d.dispose();
     }
 
-    private int calculateX(Graphics g){
+    private int calculateX(Graphics g) {
         FontMetrics fontMetrics = g.getFontMetrics();
 
         return fontMetrics.stringWidth(buttonText);

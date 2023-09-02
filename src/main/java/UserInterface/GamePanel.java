@@ -9,8 +9,6 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
@@ -18,12 +16,12 @@ import java.io.File;
 import java.io.IOException;
 
 public class GamePanel extends JPanel {
-    private Player player;
-    private Computer computer;
+    private final Player player;
+    private final Computer computer;
     private JPanel computerPanel;
     private JPanel userPanel;
     private JTextField userTextField;
-    private  JButton stepButton;
+    private JButton stepButton;
     private BufferedImage backgroundImage;
     JButton surrenderButton;
     JLabel computerLabel;
@@ -46,7 +44,7 @@ public class GamePanel extends JPanel {
         this.setVisible(true);
     }
 
-    private void createBackground(){
+    private void createBackground() {
         try {
             backgroundImage = ImageIO.read(new File("src/main/java/Files/background.png"));
         } catch (IOException e) {
@@ -181,7 +179,7 @@ public class GamePanel extends JPanel {
         }
     }
 
-    private void computerStep(String playerCity){
+    private void computerStep(String playerCity) {
         String computerCity;
 
         computerCity = computer.getNewCity(playerCity);
@@ -195,18 +193,18 @@ public class GamePanel extends JPanel {
         computer.saveComputerCity(convertFirstLetterInCity(computerCity));
     }
 
-    private String convertFirstLetterInCity(String computerCity){
+    private String convertFirstLetterInCity(String computerCity) {
         return ("" + computerCity.charAt(0)).toUpperCase() + computerCity.substring(1);
     }
 
-    private void correctPlayerStep(String playerCity){
+    private void correctPlayerStep(String playerCity) {
         player.increaseScore();
         player.savePlayerCity(convertFirstLetterInCity(playerCity));
         ListOfCities.usedCities.add(playerCity);
         userTextField.setText("");
     }
 
-    private boolean isCityAllowed(String playerCity){
+    private boolean isCityAllowed(String playerCity) {
         if (ListOfCities.usedCities.isEmpty()) {
             return WordValidator.firstStepValidate(playerCity);
         } else {

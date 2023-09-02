@@ -33,7 +33,7 @@ public class StartPanel extends JPanel {
         this.setVisible(true);
     }
 
-    private void createBackground(){
+    private void createBackground() {
         try {
             backgroundImage = ImageIO.read(new File("src/main/java/Files/background.png"));
         } catch (IOException e) {
