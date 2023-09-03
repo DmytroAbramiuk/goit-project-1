@@ -9,6 +9,8 @@ import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class StartPanel extends JPanel {
 
@@ -16,8 +18,16 @@ public class StartPanel extends JPanel {
     private JPanel startPanel;
     private JButton startButton;
     private BufferedImage backgroundImage;
+    private JButton difficultyButton;
+    private int difficultyIndex = 0;
+    private final List<String> difficulties;
 
     public StartPanel() {
+        this.difficulties = new ArrayList<>();
+        difficulties.add("EASY");
+        difficulties.add("MEDIUM");
+        difficulties.add("HARD");
+        difficulties.add("INSANE");
         initialize();
     }
 
@@ -62,14 +72,15 @@ public class StartPanel extends JPanel {
         createUsernameLabel();
         createUsernameField();
         createStartButton();
+        createDifficultyButton();
 
         this.add(startPanel);
     }
 
     private void createStartButton() {
         startButton = new JButton();
-        startButton.setPreferredSize(new Dimension(SizesOfComponents.START_BUTTON_WIDTH,
-                SizesOfComponents.START_BUTTON_HEIGHT));
+        startButton.setPreferredSize(new Dimension(SizesOfComponents.START_PANEL_BUTTON_WIDTH,
+                SizesOfComponents.START_PANEL_BUTTON_HEIGHT));
         startButton.setFont(FontCreator.makeFont(12));
         startButton.setBorder(new ButtonStyle(50, "START"));
         startButton.setBackground(DefaultColors.transparent);
@@ -94,6 +105,39 @@ public class StartPanel extends JPanel {
             @Override
             public void mouseEntered(MouseEvent e) {
                 ShadowRemover.removeShadow(startButton);
+            }
+        });
+    }
+
+    private void createDifficultyButton() {
+        difficultyButton = new JButton();
+        difficultyButton.setPreferredSize(new Dimension(SizesOfComponents.START_PANEL_BUTTON_WIDTH,
+                SizesOfComponents.START_PANEL_BUTTON_HEIGHT));
+        difficultyButton.setFont(FontCreator.makeFont(12));
+        difficultyButton.setBorder(new ButtonStyle(50, "EASY"));
+        difficultyButton.setBackground(DefaultColors.transparent);
+        difficultyButton.setForeground(DefaultColors.backgroundColor);
+
+        eventListenerForDifficultyButton();
+
+        startPanel.add(difficultyButton);
+    }
+
+    private void eventListenerForDifficultyButton() {
+        difficultyButton.addActionListener(e -> {
+            if (difficultyIndex == 3)
+                difficultyIndex = 0;
+            else {
+                difficultyIndex++;
+            }
+            difficultyButton.setBorder(new ButtonStyle(50, difficulties.get(difficultyIndex)));
+
+            ShadowRemover.removeShadow(difficultyButton);
+        });
+        difficultyButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                ShadowRemover.removeShadow(difficultyButton);
             }
         });
     }
@@ -124,7 +168,7 @@ public class StartPanel extends JPanel {
         container.setFocusable(false);
         container.removeAll();
 
-        GamePanel gamePanel = new GamePanel(usernameField.getText());
+        GamePanel gamePanel = new GamePanel(usernameField.getText(), difficultyIndex);
         container.add(gamePanel);
 
         gamePanel.requestFocusInWindow();

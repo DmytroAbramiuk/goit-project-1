@@ -10,8 +10,8 @@ public class Computer {
     private String currentCity;
     private List<String> usedComputerCities;
 
-    public Computer() {
-        computerCities = CitiesGenerator.getRandomCities();
+    public Computer(int difficulty) {
+        computerCities = CitiesGenerator.getRandomCities(difficulty);
     }
 
     public String getNewCity(String playerCity) {

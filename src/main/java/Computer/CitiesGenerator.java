@@ -9,7 +9,7 @@ import java.util.Random;
 public class CitiesGenerator {
     protected static List<String> citiesForComputer = new ArrayList<>();
 
-    public static List<String> getRandomCities() {
+    public static List<String> getRandomCities(int difficulty) {
         int numberOfRandomCity = 200;
         Random random = new Random();
         int listOfCitiesLength = ListOfCities.allCities.size();
