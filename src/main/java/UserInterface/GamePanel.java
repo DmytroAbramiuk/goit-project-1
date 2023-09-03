@@ -21,9 +21,9 @@ public class GamePanel extends JPanel {
     private JButton surrenderButton;
     private JLabel computerLabel;
 
-    public GamePanel(String username) {
+    public GamePanel(String username, int difficulty) {
         this.player = new Player(username);
-        this.computer = new Computer();
+        this.computer = new Computer(difficulty);
         initialize();
     }
 

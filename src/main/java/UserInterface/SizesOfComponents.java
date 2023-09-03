@@ -5,8 +5,8 @@ public interface SizesOfComponents {
     int PANEL_HEIGHT = 500;
 
     /* PANEL COMPONENTS */
-    int START_BUTTON_HEIGHT = 50;
-    int START_BUTTON_WIDTH = 170;
+    int START_PANEL_BUTTON_HEIGHT = 50;
+    int START_PANEL_BUTTON_WIDTH = 170;
     int USERNAME_FIELD_WIDTH = 170;
     int USERNAME_FIELD_HEIGHT = 35;
     int USER_TEXT_FIELD_WIDTH = 200;

@@ -9,8 +9,8 @@ import java.util.Random;
 public class CitiesGenerator {
     protected static List<String> citiesForComputer = new ArrayList<>();
 
-    public static List<String> getRandomCities() {
-        int numberOfRandomCity = 200;
+    public static List<String> getRandomCities(int difficulty) {
+        int numberOfRandomCity = setDifficulty(difficulty);
         Random random = new Random();
         int listOfCitiesLength = ListOfCities.allCities.size();
         while (citiesForComputer.size() < numberOfRandomCity) {
@@ -22,6 +22,23 @@ public class CitiesGenerator {
 
         return citiesForComputer;
     }
-}
 
+    private static int setDifficulty(int difficulty) {
+        switch (difficulty) {
+            case 0 -> {
+                return 100;
+            }
+            case 1 -> {
+                return 300;
+            }
+            case 2 -> {
+                return 500;
+            }
+            case 3 -> {
+                return 1000;
+            }
+        }
+        return 0;
+    }
+}
 
