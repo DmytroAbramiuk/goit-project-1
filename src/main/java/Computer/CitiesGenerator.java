@@ -10,7 +10,7 @@ public class CitiesGenerator {
     protected static List<String> citiesForComputer = new ArrayList<>();
 
     public static List<String> getRandomCities(int difficulty) {
-        int numberOfRandomCity = 200;
+        int numberOfRandomCity = setDifficulty(difficulty);
         Random random = new Random();
         int listOfCitiesLength = ListOfCities.allCities.size();
         while (citiesForComputer.size() < numberOfRandomCity) {
@@ -23,22 +23,22 @@ public class CitiesGenerator {
         return citiesForComputer;
     }
 
-    private static void setDifficulty(int difficulty) {
-        int numberOfRandomCity;
+    private static int setDifficulty(int difficulty) {
         switch (difficulty) {
-            case 0:
-                numberOfRandomCity = 100;
-                break;
-            case 1:
-                numberOfRandomCity = 300;
-                break;
-            case 2:
-                numberOfRandomCity = 500;
-                break;
-            case 3:
-                numberOfRandomCity = 1000;
-                break;
+            case 0 -> {
+                return 100;
+            }
+            case 1 -> {
+                return 300;
+            }
+            case 2 -> {
+                return 500;
+            }
+            case 3 -> {
+                return 1000;
+            }
         }
+        return 0;
     }
 }
 
