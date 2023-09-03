@@ -5,15 +5,11 @@ import ListOfCities.ListOfCities;
 import Player.Player;
 import Player.WordValidator;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 
 public class GamePanel extends JPanel {
     private final Player player;
@@ -22,9 +18,8 @@ public class GamePanel extends JPanel {
     private JPanel userPanel;
     private JTextField userTextField;
     private JButton stepButton;
-    private BufferedImage backgroundImage;
-    JButton surrenderButton;
-    JLabel computerLabel;
+    private JButton surrenderButton;
+    private JLabel computerLabel;
 
     public GamePanel(String username) {
         this.player = new Player(username);
@@ -37,27 +32,18 @@ public class GamePanel extends JPanel {
         this.setLayout(null);
 
         LogoCreator.createCitiesLogo(this);
-        createBackground();
         createComputerPanel();
         createUserPanel();
 
         this.setVisible(true);
     }
 
-    private void createBackground() {
-        try {
-            backgroundImage = ImageIO.read(new File("src/main/java/Files/background.png"));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        if (backgroundImage != null) {
-            g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
+        if (BackgroundImageCreator.createBackground() != null) {
+            g.drawImage(BackgroundImageCreator.createBackground(), 0, 0, getWidth(), getHeight(), this);
         }
     }
 
@@ -121,35 +107,6 @@ public class GamePanel extends JPanel {
         userPanel.add(stepButton);
     }
 
-    private void createSurrenderButton() {
-        surrenderButton = new JButton("Surrender");
-        surrenderButton.setPreferredSize(new Dimension(150, SizesOfComponents.USER_GAME_COMPONENTS_HEIGHT));
-        surrenderButton.setFont(FontCreator.makeFont(20));
-        surrenderButton.setBorder(new ButtonStyle(50, "Surrender"));
-        surrenderButton.setBackground(DefaultColors.transparent);
-        surrenderButton.setForeground(DefaultColors.backgroundColor);
-
-        eventListenerForSurrenderButton();
-
-        userPanel.add(surrenderButton);
-    }
-
-    private void eventListenerForSurrenderButton() {
-        surrenderButton.addActionListener(e -> {
-            player.setStatus("Loose");
-            replacePanel();
-            ShadowRemover.removeShadow(surrenderButton);
-            JOptionPane.showMessageDialog(this, "Game was ended!");
-        });
-
-        surrenderButton.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseEntered(MouseEvent e) {
-                ShadowRemover.removeShadow(surrenderButton);
-            }
-        });
-    }
-
     private void eventListenerForStepButton() {
         stepButton.addActionListener(e -> {
             if (userTextField.getText().isEmpty()) {
@@ -164,6 +121,36 @@ public class GamePanel extends JPanel {
             @Override
             public void mouseEntered(MouseEvent e) {
                 ShadowRemover.removeShadow(stepButton);
+            }
+        });
+    }
+
+    private void createSurrenderButton() {
+        surrenderButton = new JButton("Surrender");
+        surrenderButton.setPreferredSize(new Dimension(150, SizesOfComponents.USER_GAME_COMPONENTS_HEIGHT));
+        surrenderButton.setFont(FontCreator.makeFont(20));
+        surrenderButton.setBorder(new ButtonStyle(50, "Surrender"));
+        surrenderButton.setBackground(DefaultColors.transparent);
+        surrenderButton.setForeground(DefaultColors.backgroundColor);
+
+        eventListenerForSurrenderButton();
+
+        userPanel.add(surrenderButton);
+    }
+
+
+    private void eventListenerForSurrenderButton() {
+        surrenderButton.addActionListener(e -> {
+            player.setStatus("Loose");
+            replacePanel();
+            ShadowRemover.removeShadow(surrenderButton);
+            JOptionPane.showMessageDialog(this, "Game was ended!");
+        });
+
+        surrenderButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                ShadowRemover.removeShadow(surrenderButton);
             }
         });
     }
@@ -211,7 +198,6 @@ public class GamePanel extends JPanel {
             return WordValidator.validate(playerCity, computer.getCurrentCity());
         }
     }
-
 
     private void replacePanel() {
         Container container = getRootPane().getContentPane();
