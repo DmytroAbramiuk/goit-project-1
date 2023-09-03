@@ -22,6 +22,23 @@ public class CitiesGenerator {
 
         return citiesForComputer;
     }
-}
 
+    private static void setDifficulty(int difficulty) {
+        int numberOfRandomCity;
+        switch (difficulty) {
+            case 0:
+                numberOfRandomCity = 100;
+                break;
+            case 1:
+                numberOfRandomCity = 300;
+                break;
+            case 2:
+                numberOfRandomCity = 500;
+                break;
+            case 3:
+                numberOfRandomCity = 1000;
+                break;
+        }
+    }
+}
 
