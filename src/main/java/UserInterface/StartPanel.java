@@ -1,21 +1,16 @@
 package UserInterface;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 
 public class StartPanel extends JPanel {
 
     private JTextField usernameField;
     private JPanel startPanel;
     private JButton startButton;
-    private BufferedImage backgroundImage;
 
     public StartPanel() {
         initialize();
@@ -26,27 +21,18 @@ public class StartPanel extends JPanel {
                 SizesOfComponents.PANEL_HEIGHT));
         this.setLayout(null);
 
-        createBackground();
         LogoCreator.createCitiesLogo(this);
         createStartPanel();
 
         this.setVisible(true);
     }
 
-    private void createBackground() {
-        try {
-            backgroundImage = ImageIO.read(new File("src/main/java/Files/background.png"));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        if (backgroundImage != null) {
-            g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
+        if (BackgroundImageCreator.createBackground() != null) {
+            g.drawImage(BackgroundImageCreator.createBackground(), 0, 0, getWidth(), getHeight(), this);
         }
     }
 
