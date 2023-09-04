@@ -2,7 +2,7 @@ package UserInterface;
 
 import javax.swing.*;
 import java.awt.*;
-import SizesOfComponents.SizesOfComponents;
+import SizesAndColoursOfComponents.SizesOfComponents;
 public class LogoCreator extends JPanel {
     public static void createCitiesLogo(JPanel panel) {
         JPanel citiesPanel = new JPanel();

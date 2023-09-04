@@ -1,4 +1,4 @@
-package SizesOfComponents;
+package SizesAndColoursOfComponents;
 
 import java.awt.*;
 

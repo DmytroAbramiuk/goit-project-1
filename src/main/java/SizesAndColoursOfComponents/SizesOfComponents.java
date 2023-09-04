@@ -1,4 +1,4 @@
-package SizesOfComponents;
+package SizesAndColoursOfComponents;
 
 public enum SizesOfComponents {
     PANEL_WIDTH(400),

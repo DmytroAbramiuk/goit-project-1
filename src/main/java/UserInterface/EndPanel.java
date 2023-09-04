@@ -8,7 +8,7 @@ import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 
-import SizesOfComponents.SizesOfComponents;
+import SizesAndColoursOfComponents.SizesOfComponents;
 public class EndPanel extends JPanel {
     Player player;
     Computer computer;

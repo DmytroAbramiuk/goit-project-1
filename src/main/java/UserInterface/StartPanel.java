@@ -7,7 +7,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
-import SizesOfComponents.*;
+import SizesAndColoursOfComponents.*;
 public class StartPanel extends JPanel {
 
     private JTextField usernameField;

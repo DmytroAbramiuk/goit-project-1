@@ -10,8 +10,8 @@ import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import SizesOfComponents.SizesOfComponents;
-import SizesOfComponents.DefaultColorsOfComponents;
+import SizesAndColoursOfComponents.SizesOfComponents;
+import SizesAndColoursOfComponents.DefaultColorsOfComponents;
 public class GamePanel extends JPanel {
     private final Player player;
     private final Computer computer;
