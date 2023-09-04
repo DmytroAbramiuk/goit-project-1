@@ -11,6 +11,7 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import SizesOfComponents.SizesOfComponents;
+import SizesOfComponents.DefaultColorsOfComponents;
 public class GamePanel extends JPanel {
     private final Player player;
     private final Computer computer;
@@ -62,7 +63,7 @@ public class GamePanel extends JPanel {
     private void createComputerLabel() {
         computerLabel = new JLabel("Computer:");
         computerLabel.setFont(FontCreator.makeFont(20));
-        computerLabel.setForeground(DefaultColors.backgroundColor);
+        computerLabel.setForeground(DefaultColorsOfComponents.BACKGROUNDCOLOR.getColor());
 
         computerPanel.add(computerLabel);
     }
@@ -86,9 +87,9 @@ public class GamePanel extends JPanel {
         userTextField.setPreferredSize(new Dimension(SizesOfComponents.USER_TEXT_FIELD_WIDTH.getValue(),
                 SizesOfComponents.USER_GAME_COMPONENTS_HEIGHT.getValue()));
         userTextField.setFont(FontCreator.makeFont(20));
-        userTextField.setBorder(new LineBorder(DefaultColors.backgroundColor));
+        userTextField.setBorder(new LineBorder(DefaultColorsOfComponents.BACKGROUNDCOLOR.getColor()));
         userTextField.setBackground(Color.black);
-        userTextField.setForeground(DefaultColors.backgroundColor);
+        userTextField.setForeground(DefaultColorsOfComponents.BACKGROUNDCOLOR.getColor());
 
         userTextField.addActionListener(e -> repaint());
 
@@ -100,8 +101,8 @@ public class GamePanel extends JPanel {
         stepButton.setPreferredSize(new Dimension(SizesOfComponents.USER_STEP_BUTTON_WIDTH.getValue(),
                 SizesOfComponents.USER_GAME_COMPONENTS_HEIGHT.getValue()));
         stepButton.setBorder(new ButtonStyle(50, "STEP"));
-        stepButton.setBackground(DefaultColors.transparent);
-        stepButton.setForeground(DefaultColors.backgroundColor);
+        stepButton.setBackground(DefaultColorsOfComponents.TRANSPARENTCOLOR.getColor());
+        stepButton.setForeground(DefaultColorsOfComponents.BACKGROUNDCOLOR.getColor());
 
         eventListenerForStepButton();
 
@@ -131,8 +132,8 @@ public class GamePanel extends JPanel {
         surrenderButton.setPreferredSize(new Dimension(150, SizesOfComponents.USER_GAME_COMPONENTS_HEIGHT.getValue()));
         surrenderButton.setFont(FontCreator.makeFont(20));
         surrenderButton.setBorder(new ButtonStyle(50, "Surrender"));
-        surrenderButton.setBackground(DefaultColors.transparent);
-        surrenderButton.setForeground(DefaultColors.backgroundColor);
+        surrenderButton.setBackground(DefaultColorsOfComponents.BACKGROUNDCOLOR.getColor());
+        surrenderButton.setForeground(DefaultColorsOfComponents.BACKGROUNDCOLOR.getColor());
 
         eventListenerForSurrenderButton();
 
@@ -182,7 +183,7 @@ public class GamePanel extends JPanel {
     }
 
     private String convertFirstLetterInCity(String computerCity) {
-        return ("" + computerCity.charAt(0)).toUpperCase() + computerCity.substring(1);
+        return (Character.toString(computerCity.charAt(0))).toUpperCase() + computerCity.substring(1);
     }
 
     private void correctPlayerStep(String playerCity) {

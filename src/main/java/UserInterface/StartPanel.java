@@ -7,7 +7,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
-import SizesOfComponents.SizesOfComponents;
+import SizesOfComponents.*;
 public class StartPanel extends JPanel {
 
     private JTextField usernameField;
@@ -69,8 +69,8 @@ public class StartPanel extends JPanel {
                 SizesOfComponents.START_PANEL_BUTTON_HEIGHT.getValue()));
         startButton.setFont(FontCreator.makeFont(12));
         startButton.setBorder(new ButtonStyle(50, "START"));
-        startButton.setBackground(DefaultColors.transparent);
-        startButton.setForeground(DefaultColors.backgroundColor);
+        startButton.setBackground(DefaultColorsOfComponents.TRANSPARENTCOLOR.getColor());
+        startButton.setForeground(DefaultColorsOfComponents.BACKGROUNDCOLOR.getColor());
 
         eventListenerForStartButton();
 
@@ -101,8 +101,8 @@ public class StartPanel extends JPanel {
                 SizesOfComponents.START_PANEL_BUTTON_HEIGHT.getValue()));
         difficultyButton.setFont(FontCreator.makeFont(12));
         difficultyButton.setBorder(new ButtonStyle(50, "EASY"));
-        difficultyButton.setBackground(DefaultColors.transparent);
-        difficultyButton.setForeground(DefaultColors.backgroundColor);
+        difficultyButton.setBackground(DefaultColorsOfComponents.TRANSPARENTCOLOR.getColor());
+        difficultyButton.setForeground(DefaultColorsOfComponents.BACKGROUNDCOLOR.getColor());
 
         eventListenerForDifficultyButton();
 
@@ -140,9 +140,9 @@ public class StartPanel extends JPanel {
         usernameField.setFont(FontCreator.makeFont(20));
         usernameField.setPreferredSize(new Dimension(SizesOfComponents.USERNAME_FIELD_WIDTH.getValue(),
                 SizesOfComponents.USERNAME_FIELD_HEIGHT.getValue()));
-        usernameField.setBorder(new LineBorder(DefaultColors.backgroundColor));
+        usernameField.setBorder(new LineBorder(DefaultColorsOfComponents.BACKGROUNDCOLOR.getColor()));
         usernameField.setBackground(Color.black);
-        usernameField.setForeground(DefaultColors.backgroundColor);
+        usernameField.setForeground(DefaultColorsOfComponents.BACKGROUNDCOLOR.getColor());
 
         usernameField.addActionListener(e -> repaint());
 
