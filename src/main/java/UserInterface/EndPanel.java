@@ -23,7 +23,8 @@ public class EndPanel extends JPanel {
     }
 
     private void initialize() {
-        this.setPreferredSize(new Dimension(SizesOfComponents.PANEL_WIDTH.getValue(), SizesOfComponents.PANEL_HEIGHT.getValue()));
+        this.setPreferredSize(new Dimension(SizesOfComponents.DEFAULT_PANEL_WIDTH.getValue(),
+                SizesOfComponents.DEFAULT_PANEL_HEIGHT.getValue()));
         this.setLayout(null);
 
         createResultsLabel();
@@ -44,21 +45,22 @@ public class EndPanel extends JPanel {
 
     private void createResultsLabel() {
         JLabel resultsLabel = new JLabel("Results");
-        resultsLabel.setBounds(0, 0, SizesOfComponents.PANEL_WIDTH.getValue(), SizesOfComponents.PANEL_HEIGHT.getValue() / 5);
+        resultsLabel.setBounds(0, 0, SizesOfComponents.DEFAULT_PANEL_WIDTH.getValue(),
+                SizesOfComponents.DEFAULT_PANEL_HEIGHT.getValue() / 5);
         resultsLabel.setOpaque(false);
 
         resultsLabel.setHorizontalAlignment(SwingConstants.CENTER);
         resultsLabel.setBorder(new LineBorder(Color.BLACK));
 
-        resultsLabel.setFont(FontCreator.makeFont(50));
+        resultsLabel.setFont(FontCreator.makeFont(SizesOfComponents.FONT_SIZE_50.getValue()));
 
         this.add(resultsLabel);
     }
 
     private void createScoreBoardPanel() {
         JPanel scoreboardPanel = new JPanel();
-        scoreboardPanel.setBounds(0, SizesOfComponents.PANEL_HEIGHT.getValue() / 5,
-                SizesOfComponents.PANEL_WIDTH.getValue(), 20);
+        scoreboardPanel.setBounds(0, SizesOfComponents.DEFAULT_PANEL_HEIGHT.getValue() / 5,
+                SizesOfComponents.DEFAULT_PANEL_WIDTH.getValue(), 20);
         scoreboardPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
         scoreboardPanel.setOpaque(false);
 
@@ -68,7 +70,7 @@ public class EndPanel extends JPanel {
 
         JLabel playerResultsLabel = new JLabel(player.getUsername()
                 + " " + player.getStatus() + " with " + player.getScore() + lastPart);
-        playerResultsLabel.setFont(FontCreator.makeFont(15));
+        playerResultsLabel.setFont(FontCreator.makeFont(SizesOfComponents.FONT_SIZE_15.getValue()));
 
         scoreboardPanel.add(playerResultsLabel);
 
@@ -78,9 +80,9 @@ public class EndPanel extends JPanel {
     private void createResultWordListsPanel() {
         resultWordListPanel = new JPanel();
         resultWordListPanel.setLayout(new BorderLayout());
-        resultWordListPanel.setBounds(0, SizesOfComponents.PANEL_HEIGHT.getValue() / 5 + 20,
-                SizesOfComponents.PANEL_WIDTH.getValue(),
-                SizesOfComponents.PANEL_HEIGHT.getValue() - (SizesOfComponents.PANEL_HEIGHT.getValue() / 5 + 20));
+        resultWordListPanel.setBounds(0, SizesOfComponents.DEFAULT_PANEL_HEIGHT.getValue() / 5 + 20,
+                SizesOfComponents.DEFAULT_PANEL_WIDTH.getValue(),
+                SizesOfComponents.DEFAULT_PANEL_HEIGHT.getValue() - (SizesOfComponents.DEFAULT_PANEL_HEIGHT.getValue() / 5 + 20));
         resultWordListPanel.setOpaque(false);
 
         createTopPanel();
@@ -102,7 +104,7 @@ public class EndPanel extends JPanel {
 
     private void createPlayerLabel() {
         JLabel playerLabel = new JLabel("Player cities");
-        playerLabel.setFont(FontCreator.makeFont(15));
+        playerLabel.setFont(FontCreator.makeFont(SizesOfComponents.FONT_SIZE_15.getValue()));
         playerLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
         topPanel.add(playerLabel);
@@ -110,7 +112,7 @@ public class EndPanel extends JPanel {
 
     private void createComputerLabel() {
         JLabel computerLabel = new JLabel("Computer cities");
-        computerLabel.setFont(FontCreator.makeFont(15));
+        computerLabel.setFont(FontCreator.makeFont(SizesOfComponents.FONT_SIZE_15.getValue()));
         computerLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
         topPanel.add(computerLabel);
@@ -134,7 +136,7 @@ public class EndPanel extends JPanel {
         JScrollPane playerCitiesScrollPane = new JScrollPane(playerCitiesLabel);
         playerCitiesScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
 
-        playerCitiesLabel.setFont(FontCreator.makeFont(15));
+        playerCitiesLabel.setFont(FontCreator.makeFont(SizesOfComponents.FONT_SIZE_15.getValue()));
         playerCitiesLabel.setVerticalAlignment(SwingConstants.TOP);
         playerCitiesLabel.setBorder(new LineBorder(Color.BLACK));
 
@@ -150,7 +152,7 @@ public class EndPanel extends JPanel {
         JScrollPane computerCitiesScrollPane = new JScrollPane(computerCitiesLabel);
         computerCitiesScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
 
-        computerCitiesLabel.setFont(FontCreator.makeFont(15));
+        computerCitiesLabel.setFont(FontCreator.makeFont(SizesOfComponents.FONT_SIZE_15.getValue()));
         computerCitiesLabel.setVerticalAlignment(SwingConstants.TOP);
         computerCitiesLabel.setBorder(new LineBorder(Color.BLACK));
 

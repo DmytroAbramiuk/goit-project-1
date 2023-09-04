@@ -29,8 +29,8 @@ public class GamePanel extends JPanel {
     }
 
     private void initialize() {
-        this.setPreferredSize(new Dimension(SizesOfComponents.PANEL_WIDTH.getValue(),
-                SizesOfComponents.PANEL_HEIGHT.getValue()));
+        this.setPreferredSize(new Dimension(SizesOfComponents.DEFAULT_PANEL_WIDTH.getValue(),
+                SizesOfComponents.DEFAULT_PANEL_HEIGHT.getValue()));
         this.setLayout(null);
 
         LogoCreator.createCitiesLogo(this);
@@ -51,7 +51,9 @@ public class GamePanel extends JPanel {
 
     private void createComputerPanel() {
         computerPanel = new JPanel();
-        computerPanel.setBounds(0, SizesOfComponents.PANEL_HEIGHT.getValue() / 2 - 70, 400, 40);
+        computerPanel.setBounds(0, SizesOfComponents.DEFAULT_PANEL_HEIGHT.getValue() / 2 - 70,
+                SizesOfComponents.DEFAULT_PANEL_WIDTH.getValue(),
+                SizesOfComponents.COMPUTER_PANEL_HEIGHT.getValue());
         computerPanel.setBackground(Color.black);
         computerPanel.setLayout(new FlowLayout());
 
@@ -62,7 +64,7 @@ public class GamePanel extends JPanel {
 
     private void createComputerLabel() {
         computerLabel = new JLabel("Computer:");
-        computerLabel.setFont(FontCreator.makeFont(20));
+        computerLabel.setFont(FontCreator.makeFont(SizesOfComponents.FONT_SIZE_20.getValue()));
         computerLabel.setForeground(DefaultColorsOfComponents.BACKGROUNDCOLOR.getColor());
 
         computerPanel.add(computerLabel);
@@ -70,7 +72,9 @@ public class GamePanel extends JPanel {
 
     private void createUserPanel() {
         userPanel = new JPanel();
-        userPanel.setBounds(20, SizesOfComponents.PANEL_HEIGHT.getValue() / 2 - 30, 360, 80);
+        userPanel.setBounds(20, SizesOfComponents.DEFAULT_PANEL_HEIGHT.getValue() / 2 - 30,
+                SizesOfComponents.USER_PANEL_WIDTH.getValue(),
+                SizesOfComponents.USER_PANEL_HEIGHT.getValue());
         userPanel.setOpaque(false);
         userPanel.setLayout(new FlowLayout());
         userPanel.setOpaque(false);
@@ -86,7 +90,7 @@ public class GamePanel extends JPanel {
         userTextField = new JTextField("");
         userTextField.setPreferredSize(new Dimension(SizesOfComponents.USER_TEXT_FIELD_WIDTH.getValue(),
                 SizesOfComponents.USER_GAME_COMPONENTS_HEIGHT.getValue()));
-        userTextField.setFont(FontCreator.makeFont(20));
+        userTextField.setFont(FontCreator.makeFont(SizesOfComponents.FONT_SIZE_20.getValue()));
         userTextField.setBorder(new LineBorder(DefaultColorsOfComponents.BACKGROUNDCOLOR.getColor()));
         userTextField.setBackground(Color.black);
         userTextField.setForeground(DefaultColorsOfComponents.BACKGROUNDCOLOR.getColor());
@@ -100,7 +104,7 @@ public class GamePanel extends JPanel {
         stepButton = new JButton();
         stepButton.setPreferredSize(new Dimension(SizesOfComponents.USER_STEP_BUTTON_WIDTH.getValue(),
                 SizesOfComponents.USER_GAME_COMPONENTS_HEIGHT.getValue()));
-        stepButton.setBorder(new ButtonStyle(50, "STEP"));
+        stepButton.setBorder(new ButtonStyle( "STEP"));
         stepButton.setBackground(DefaultColorsOfComponents.TRANSPARENTCOLOR.getColor());
         stepButton.setForeground(DefaultColorsOfComponents.BACKGROUNDCOLOR.getColor());
 
@@ -129,9 +133,10 @@ public class GamePanel extends JPanel {
 
     private void createSurrenderButton() {
         surrenderButton = new JButton("Surrender");
-        surrenderButton.setPreferredSize(new Dimension(150, SizesOfComponents.USER_GAME_COMPONENTS_HEIGHT.getValue()));
-        surrenderButton.setFont(FontCreator.makeFont(20));
-        surrenderButton.setBorder(new ButtonStyle(50, "Surrender"));
+        surrenderButton.setPreferredSize(new Dimension(SizesOfComponents.SURRENDER_BUTTON_WIDTH.getValue(),
+                SizesOfComponents.USER_GAME_COMPONENTS_HEIGHT.getValue()));
+        surrenderButton.setFont(FontCreator.makeFont(SizesOfComponents.FONT_SIZE_20.getValue()));
+        surrenderButton.setBorder(new ButtonStyle( "Surrender"));
         surrenderButton.setBackground(DefaultColorsOfComponents.BACKGROUNDCOLOR.getColor());
         surrenderButton.setForeground(DefaultColorsOfComponents.BACKGROUNDCOLOR.getColor());
 
