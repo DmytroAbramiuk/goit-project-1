@@ -7,7 +7,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
-
+import SizesOfComponents.SizesOfComponents;
 public class StartPanel extends JPanel {
 
     private JTextField usernameField;
@@ -27,8 +27,8 @@ public class StartPanel extends JPanel {
     }
 
     private void initialize() {
-        this.setPreferredSize(new Dimension(SizesOfComponents.PANEL_WIDTH,
-                SizesOfComponents.PANEL_HEIGHT));
+        this.setPreferredSize(new Dimension(SizesOfComponents.PANEL_WIDTH.getValue(),
+                SizesOfComponents.PANEL_HEIGHT.getValue()));
         this.setLayout(null);
 
         LogoCreator.createCitiesLogo(this);
@@ -49,9 +49,9 @@ public class StartPanel extends JPanel {
     private void createStartPanel() {
         startPanel = new JPanel();
         startPanel.setBounds(0,
-                SizesOfComponents.PANEL_HEIGHT / 4,
+                SizesOfComponents.PANEL_HEIGHT.getValue() / 4,
                 400,
-                SizesOfComponents.PANEL_HEIGHT - SizesOfComponents.PANEL_HEIGHT / 4);
+                SizesOfComponents.PANEL_HEIGHT.getValue() - SizesOfComponents.PANEL_HEIGHT.getValue() / 4);
         startPanel.setOpaque(false);
         startPanel.setLayout(new FlowLayout());
 
@@ -65,8 +65,8 @@ public class StartPanel extends JPanel {
 
     private void createStartButton() {
         startButton = new JButton();
-        startButton.setPreferredSize(new Dimension(SizesOfComponents.START_PANEL_BUTTON_WIDTH,
-                SizesOfComponents.START_PANEL_BUTTON_HEIGHT));
+        startButton.setPreferredSize(new Dimension(SizesOfComponents.START_PANEL_BUTTON_WIDTH.getValue(),
+                SizesOfComponents.START_PANEL_BUTTON_HEIGHT.getValue()));
         startButton.setFont(FontCreator.makeFont(12));
         startButton.setBorder(new ButtonStyle(50, "START"));
         startButton.setBackground(DefaultColors.transparent);
@@ -97,8 +97,8 @@ public class StartPanel extends JPanel {
 
     private void createDifficultyButton() {
         difficultyButton = new JButton();
-        difficultyButton.setPreferredSize(new Dimension(SizesOfComponents.START_PANEL_BUTTON_WIDTH,
-                SizesOfComponents.START_PANEL_BUTTON_HEIGHT));
+        difficultyButton.setPreferredSize(new Dimension(SizesOfComponents.START_PANEL_BUTTON_WIDTH.getValue(),
+                SizesOfComponents.START_PANEL_BUTTON_HEIGHT.getValue()));
         difficultyButton.setFont(FontCreator.makeFont(12));
         difficultyButton.setBorder(new ButtonStyle(50, "EASY"));
         difficultyButton.setBackground(DefaultColors.transparent);
@@ -138,8 +138,8 @@ public class StartPanel extends JPanel {
     private void createUsernameField() {
         usernameField = new JTextField();
         usernameField.setFont(FontCreator.makeFont(20));
-        usernameField.setPreferredSize(new Dimension(SizesOfComponents.USERNAME_FIELD_WIDTH,
-                SizesOfComponents.USERNAME_FIELD_HEIGHT));
+        usernameField.setPreferredSize(new Dimension(SizesOfComponents.USERNAME_FIELD_WIDTH.getValue(),
+                SizesOfComponents.USERNAME_FIELD_HEIGHT.getValue()));
         usernameField.setBorder(new LineBorder(DefaultColors.backgroundColor));
         usernameField.setBackground(Color.black);
         usernameField.setForeground(DefaultColors.backgroundColor);

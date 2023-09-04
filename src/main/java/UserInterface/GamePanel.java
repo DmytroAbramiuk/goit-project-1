@@ -10,7 +10,7 @@ import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
+import SizesOfComponents.SizesOfComponents;
 public class GamePanel extends JPanel {
     private final Player player;
     private final Computer computer;
@@ -28,7 +28,8 @@ public class GamePanel extends JPanel {
     }
 
     private void initialize() {
-        this.setPreferredSize(new Dimension(SizesOfComponents.PANEL_WIDTH, SizesOfComponents.PANEL_HEIGHT));
+        this.setPreferredSize(new Dimension(SizesOfComponents.PANEL_WIDTH.getValue(),
+                SizesOfComponents.PANEL_HEIGHT.getValue()));
         this.setLayout(null);
 
         LogoCreator.createCitiesLogo(this);
@@ -49,7 +50,7 @@ public class GamePanel extends JPanel {
 
     private void createComputerPanel() {
         computerPanel = new JPanel();
-        computerPanel.setBounds(0, SizesOfComponents.PANEL_HEIGHT / 2 - 70, 400, 40);
+        computerPanel.setBounds(0, SizesOfComponents.PANEL_HEIGHT.getValue() / 2 - 70, 400, 40);
         computerPanel.setBackground(Color.black);
         computerPanel.setLayout(new FlowLayout());
 
@@ -68,7 +69,7 @@ public class GamePanel extends JPanel {
 
     private void createUserPanel() {
         userPanel = new JPanel();
-        userPanel.setBounds(20, SizesOfComponents.PANEL_HEIGHT / 2 - 30, 360, 80);
+        userPanel.setBounds(20, SizesOfComponents.PANEL_HEIGHT.getValue() / 2 - 30, 360, 80);
         userPanel.setOpaque(false);
         userPanel.setLayout(new FlowLayout());
         userPanel.setOpaque(false);
@@ -82,8 +83,8 @@ public class GamePanel extends JPanel {
 
     private void createUserTextField() {
         userTextField = new JTextField("");
-        userTextField.setPreferredSize(new Dimension(SizesOfComponents.USER_TEXT_FIELD_WIDTH,
-                SizesOfComponents.USER_GAME_COMPONENTS_HEIGHT));
+        userTextField.setPreferredSize(new Dimension(SizesOfComponents.USER_TEXT_FIELD_WIDTH.getValue(),
+                SizesOfComponents.USER_GAME_COMPONENTS_HEIGHT.getValue()));
         userTextField.setFont(FontCreator.makeFont(20));
         userTextField.setBorder(new LineBorder(DefaultColors.backgroundColor));
         userTextField.setBackground(Color.black);
@@ -96,8 +97,8 @@ public class GamePanel extends JPanel {
 
     private void createStepButton() {
         stepButton = new JButton();
-        stepButton.setPreferredSize(new Dimension(SizesOfComponents.USER_STEP_BUTTON_WIDTH,
-                SizesOfComponents.USER_GAME_COMPONENTS_HEIGHT));
+        stepButton.setPreferredSize(new Dimension(SizesOfComponents.USER_STEP_BUTTON_WIDTH.getValue(),
+                SizesOfComponents.USER_GAME_COMPONENTS_HEIGHT.getValue()));
         stepButton.setBorder(new ButtonStyle(50, "STEP"));
         stepButton.setBackground(DefaultColors.transparent);
         stepButton.setForeground(DefaultColors.backgroundColor);
@@ -127,7 +128,7 @@ public class GamePanel extends JPanel {
 
     private void createSurrenderButton() {
         surrenderButton = new JButton("Surrender");
-        surrenderButton.setPreferredSize(new Dimension(150, SizesOfComponents.USER_GAME_COMPONENTS_HEIGHT));
+        surrenderButton.setPreferredSize(new Dimension(150, SizesOfComponents.USER_GAME_COMPONENTS_HEIGHT.getValue()));
         surrenderButton.setFont(FontCreator.makeFont(20));
         surrenderButton.setBorder(new ButtonStyle(50, "Surrender"));
         surrenderButton.setBackground(DefaultColors.transparent);

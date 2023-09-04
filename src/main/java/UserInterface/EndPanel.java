@@ -8,9 +8,8 @@ import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 
+import SizesOfComponents.SizesOfComponents;
 public class EndPanel extends JPanel {
-    private final static int PANEL_WIDTH = 400;
-    private final static int PANEL_HEIGHT = 500;
     Player player;
     Computer computer;
     JPanel resultWordListPanel;
@@ -24,7 +23,7 @@ public class EndPanel extends JPanel {
     }
 
     private void initialize() {
-        this.setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
+        this.setPreferredSize(new Dimension(SizesOfComponents.PANEL_WIDTH.getValue(), SizesOfComponents.PANEL_HEIGHT.getValue()));
         this.setLayout(null);
 
         createResultsLabel();
@@ -45,7 +44,7 @@ public class EndPanel extends JPanel {
 
     private void createResultsLabel() {
         JLabel resultsLabel = new JLabel("Results");
-        resultsLabel.setBounds(0, 0, PANEL_WIDTH, PANEL_HEIGHT / 5);
+        resultsLabel.setBounds(0, 0, SizesOfComponents.PANEL_WIDTH.getValue(), SizesOfComponents.PANEL_HEIGHT.getValue() / 5);
         resultsLabel.setOpaque(false);
 
         resultsLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -58,7 +57,8 @@ public class EndPanel extends JPanel {
 
     private void createScoreBoardPanel() {
         JPanel scoreboardPanel = new JPanel();
-        scoreboardPanel.setBounds(0, PANEL_HEIGHT / 5, PANEL_WIDTH, 20);
+        scoreboardPanel.setBounds(0, SizesOfComponents.PANEL_HEIGHT.getValue() / 5,
+                SizesOfComponents.PANEL_WIDTH.getValue(), 20);
         scoreboardPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
         scoreboardPanel.setOpaque(false);
 
@@ -66,7 +66,8 @@ public class EndPanel extends JPanel {
         if (player.getScore() == 1)
             lastPart = " word";
 
-        JLabel playerResultsLabel = new JLabel(player.getUsername() + " " + player.getStatus() + " with " + player.getScore() + lastPart);
+        JLabel playerResultsLabel = new JLabel(player.getUsername()
+                + " " + player.getStatus() + " with " + player.getScore() + lastPart);
         playerResultsLabel.setFont(FontCreator.makeFont(15));
 
         scoreboardPanel.add(playerResultsLabel);
@@ -77,7 +78,9 @@ public class EndPanel extends JPanel {
     private void createResultWordListsPanel() {
         resultWordListPanel = new JPanel();
         resultWordListPanel.setLayout(new BorderLayout());
-        resultWordListPanel.setBounds(0, PANEL_HEIGHT / 5 + 20, PANEL_WIDTH, PANEL_HEIGHT - (PANEL_HEIGHT / 5 + 20));
+        resultWordListPanel.setBounds(0, SizesOfComponents.PANEL_HEIGHT.getValue() / 5 + 20,
+                SizesOfComponents.PANEL_WIDTH.getValue(),
+                SizesOfComponents.PANEL_HEIGHT.getValue() - (SizesOfComponents.PANEL_HEIGHT.getValue() / 5 + 20));
         resultWordListPanel.setOpaque(false);
 
         createTopPanel();
