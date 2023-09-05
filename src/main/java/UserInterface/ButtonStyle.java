@@ -5,12 +5,11 @@ import java.awt.*;
 import java.awt.geom.RoundRectangle2D;
 
 public class ButtonStyle implements Border {
-    private final int arc;
+    private final int arc = 50;
     private final String buttonText;
 
-    public ButtonStyle(int arc, String buttonText) {
+    public ButtonStyle( String buttonText) {
         this.buttonText = buttonText;
-        this.arc = arc;
     }
 
     @Override
